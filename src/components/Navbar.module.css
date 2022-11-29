@@ -1,0 +1,43 @@
+.navbar {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 2.5rem;
+}
+
+.nav ul {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0 2rem 0 2rem;
+}
+
+.nav li {
+  list-style: none;
+  width: 6rem;
+  height: 5rem;
+}
+
+.nav a.inactive {
+  text-decoration: none;
+  color: black;
+}
+
+.nav a.active {
+  text-decoration: none;
+  color: #007838;
+}
+
+.btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  gap: 0.35rem;
+}
+
+.btn p {
+  font-size: 1.2rem;
+}
