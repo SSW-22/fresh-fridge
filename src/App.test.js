@@ -2,13 +2,14 @@ import { render } from "@testing-library/react";
 
 import App from "./App";
 
-describe("App", () => {
-  it("nav", () => {
-    const { container } = render(<App />);
+jest.mock("react-redux");
 
-    expect(container).toHaveTextContent("Inventory");
-    expect(container).toHaveTextContent("Grocery");
-    expect(container).toHaveTextContent("Recipe");
-    expect(container).toHaveTextContent("Profile");
+describe("App", () => {
+  it("nav not display when user not log in", () => {
+    const { container } = render(<App />);
+    expect(container).not.toHaveTextContent("Inventory");
+    expect(container).not.toHaveTextContent("Grocery");
+    expect(container).not.toHaveTextContent("Recipe");
+    expect(container).not.toHaveTextContent("Profile");
   });
 });
