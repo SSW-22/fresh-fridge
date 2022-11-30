@@ -1,23 +1,29 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialToken = localStorage.getItem("token");
-const initialId = localStorage.getItem("id");
+// const initialToken = sessionStorage.getItem("token");
+// const initialId = sessionStorage.getItem("id");
 
-let initialUserState;
+// let initialUserState;
 
-if (initialToken) {
-  initialUserState = {
-    token: initialToken,
-    uid: initialId,
-    isLogIn: true,
-  };
-} else {
-  initialUserState = {
-    token: "",
-    uid: "",
-    isLogIn: false,
-  };
-}
+// if (initialToken) {
+//   initialUserState = {
+//     token: initialToken,
+//     uid: initialId,
+//     isLogIn: true,
+//   };
+// } else {
+//   initialUserState = {
+//     token: "",
+//     uid: "",
+//     isLogIn: false,
+//   };
+// }
+
+const initialUserState = {
+  token: "",
+  uid: "",
+  isLogIn: false,
+};
 
 const userSlice = createSlice({
   name: "user",

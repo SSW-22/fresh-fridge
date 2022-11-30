@@ -13,8 +13,8 @@ function SignIn() {
       .then((result) => {
         const { user } = result;
         dispatch(userActions.logIn(user.accessToken, user.uid));
-        localStorage.setItem("token", user.accessToken);
-        localStorage.setItem("id", user.uid);
+        // sessionStorage.setItem("token", user.accessToken);
+        // sessionStorage.setItem("id", user.uid);
         navigate("inventory");
       })
       .catch((error) => {
