@@ -1,24 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-// const initialToken = sessionStorage.getItem("token");
-// const initialId = sessionStorage.getItem("id");
-
-// let initialUserState;
-
-// if (initialToken) {
-//   initialUserState = {
-//     token: initialToken,
-//     uid: initialId,
-//     isLogIn: true,
-//   };
-// } else {
-//   initialUserState = {
-//     token: "",
-//     uid: "",
-//     isLogIn: false,
-//   };
-// }
-
 const initialUserState = {
   token: "",
   uid: "",
@@ -37,6 +18,15 @@ const userSlice = createSlice({
         isLogIn: true,
       };
       return loginAuth;
+    },
+    logOut(state) {
+      let logoutAuth = state;
+      logoutAuth = {
+        token: "",
+        uid: "",
+        isLogIn: false,
+      };
+      return logoutAuth;
     },
   },
 });

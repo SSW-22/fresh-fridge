@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import signInWithGoogle from "../../firebase/googleAuth";
+import { signInWithGoogle } from "../../firebase/googleAuth";
 import { userActions } from "../../store/userSlice";
 import classes from "./SignIn.module.css";
 
