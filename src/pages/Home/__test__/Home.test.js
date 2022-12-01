@@ -1,29 +1,17 @@
-import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import { render as rtlRender, screen } from "@testing-library/react";
+// import { BrowserRouter } from "react-router-dom";
+import { Provider } from "react-redux";
 import Home from "../Home";
+import store from "../../../store/index";
 
-jest.mock("react-redux");
-
-function Router() {
-  return (
-    <BrowserRouter>
-      <Home />
-    </BrowserRouter>
-  );
-}
+const render = (component) =>
+  rtlRender(<Provider store={store}>{component}</Provider>);
 
 describe("Home component test", () => {
-  it("Home component render", () => {
-    render(<Router />);
+  it("Home component render loading", async () => {
+    render(<Home />);
 
-    const homeText = screen.getByText(/fresh fridge/i);
-    expect(homeText).toBeInTheDocument();
-  });
-
-  it("sign in button render", () => {
-    render(<Router />);
-
-    const homeText = screen.getByText(/sign in with your google account/i);
+    const homeText = await screen.findByText(/loading/i);
     expect(homeText).toBeInTheDocument();
   });
 });

@@ -1,15 +1,15 @@
-import { render } from "@testing-library/react";
-
+import { render as rtlRender, screen } from "@testing-library/react";
+import { Provider } from "react-redux";
+import store from "./store/index";
 import App from "./App";
 
-jest.mock("react-redux");
-
+const render = (component) =>
+  rtlRender(<Provider store={store}>{component}</Provider>);
 describe("App", () => {
-  it("nav not display when user not log in", () => {
-    const { container } = render(<App />);
-    expect(container).not.toHaveTextContent("Inventory");
-    expect(container).not.toHaveTextContent("Grocery");
-    expect(container).not.toHaveTextContent("Recipe");
-    expect(container).not.toHaveTextContent("Profile");
+  it("nav not display when user not log in", async () => {
+    render(<App />);
+    const title = await screen.findByText(/fresh fridge/i);
+
+    expect(title).toBeInTheDocument();
   });
 });

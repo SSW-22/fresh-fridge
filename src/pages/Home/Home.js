@@ -17,6 +17,9 @@ function Home() {
         const { accessToken, uid } = currentUser;
         dispatch(userActions.logIn({ accessToken, uid }));
         setIsLoading(false);
+      } else {
+        dispatch(userActions.logOut());
+        setIsLoading(false);
       }
     });
   }, [dispatch]);

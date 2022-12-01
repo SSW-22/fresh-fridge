@@ -6,6 +6,7 @@ import Recipe from "../../../pages/Recipe/Recipe";
 import Profile from "../../../pages/Profile/Profile";
 import Navbar from "../Navbar";
 
+jest.mock("react-redux");
 function MockRouter() {
   return (
     <MemoryRouter initialEntries={["/inventory"]}>

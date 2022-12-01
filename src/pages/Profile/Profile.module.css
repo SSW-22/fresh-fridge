@@ -1,0 +1,24 @@
+.container {
+  padding: 5.5rem 3.5rem 0 3.5rem;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+.text-box {
+  margin-top: 3.3rem;
+  margin-bottom: 3.3rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.7rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+.text-box-header {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
+
+.text-box-p {
+  font-size: 1.2rem;
+  line-height: 2rem;
+}
