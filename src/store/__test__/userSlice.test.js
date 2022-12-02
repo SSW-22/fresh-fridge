@@ -1,23 +1,31 @@
-import userSlice, { userActions } from "../userSlice";
+import reducer, { userActions } from "../userSlice";
 
 describe("redux", () => {
-  it("logIn", () => {
-    const initialState = { token: "", uid: "" };
-    const state = userSlice(
-      initialState,
-      userActions.logIn({ token: "token", uid: "uid" }),
-    );
-
-    expect(state.uid).not.toHaveLength(0);
+  test("initial", () => {
+    expect(reducer(undefined, { type: undefined })).toEqual({
+      token: "",
+      uid: "",
+      isLogIn: false,
+    });
   });
 
-  it("logOut", () => {
-    const initialState = { token: "token", uid: "uid" };
-    const state = userSlice(
-      initialState,
-      userActions.logOut({ token: "", uid: "" }),
-    );
+  test("Log in", () => {
+    const previousState = {};
+    expect(
+      reducer(previousState, userActions.logIn({ token: "token", uid: "uid" })),
+    ).toEqual({
+      token: "token",
+      uid: "uid",
+      isLogIn: true,
+    });
+  });
 
-    expect(state.uid).toHaveLength(0);
+  test("Log out", () => {
+    const previousState = { token: "token", uid: "uid" };
+    expect(reducer(previousState, userActions.logOut())).toEqual({
+      token: "",
+      uid: "",
+      isLogIn: false,
+    });
   });
 });
