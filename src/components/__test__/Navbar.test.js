@@ -1,10 +1,11 @@
-import { fireEvent, render, screen } from "@testing-library/react";
+import { fireEvent, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Inventory from "../../pages/Inventory/Inventory";
 import Grocery from "../../pages/Grocery/Grocery";
 import Recipe from "../../pages/Recipe/Recipe";
 import Profile from "../../pages/Profile/Profile";
 import Navbar from "../Navbar";
+import renderWithProviders from "../../utils/test-utils";
 
 function MockRouter() {
   return (
@@ -22,7 +23,7 @@ function MockRouter() {
 
 describe("Nav bar", () => {
   it("link to Inventory when Inventory link is clicked", async () => {
-    render(<MockRouter />);
+    renderWithProviders(<MockRouter />);
 
     fireEvent.click(screen.getByText("Inventory"));
 
@@ -31,7 +32,7 @@ describe("Nav bar", () => {
   });
 
   it("link to Grocery when Grocery link is clicked", async () => {
-    render(<MockRouter />);
+    renderWithProviders(<MockRouter />);
 
     fireEvent.click(screen.getByText("Grocery"));
 
@@ -40,7 +41,7 @@ describe("Nav bar", () => {
   });
 
   it("link to Recipe when Recipe link is clicked", async () => {
-    render(<MockRouter />);
+    renderWithProviders(<MockRouter />);
 
     fireEvent.click(screen.getByText("Recipe"));
 
@@ -49,7 +50,7 @@ describe("Nav bar", () => {
   });
 
   it("link to Profile when Profile link is clicked", async () => {
-    render(<MockRouter />);
+    renderWithProviders(<MockRouter />);
 
     fireEvent.click(screen.getByText("Profile"));
 
