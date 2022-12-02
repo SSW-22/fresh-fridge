@@ -1,21 +1,16 @@
+/* eslint-disable react/prop-types */
 import { render } from "@testing-library/react";
-import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
-import userSlice from "../store/userSlice";
-import inventorySlice from "../store/inventorySlice";
+import { setupStore } from "../store/index";
+// As a basic setup, import your same slice reducers
+// import inventorySlice from "../store/inventorySlice";
 
 function renderWithProviders(
   ui,
   {
     preloadedState = {},
     // Automatically create a store instance if no store was passed in
-    store = configureStore({
-      reducer: {
-        user: userSlice,
-        inventory: inventorySlice,
-      },
-      preloadedState,
-    }),
+    store = setupStore(preloadedState),
     ...renderOptions
   } = {},
 ) {

@@ -4,7 +4,7 @@ import {
   Route,
   Navigate,
 } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "./hooks/react-redux-hooks";
 
 import "./App.css";
 import Navbar from "./components/Navbar/Navbar";
@@ -15,7 +15,7 @@ import Profile from "./pages/Profile/Profile";
 import Home from "./pages/Home/Home";
 
 function App() {
-  const isLogin = useSelector((state) => state.user.isLogIn);
+  const isLogin = useAppSelector((state) => state.user.isLogIn);
 
   return (
     <div className="App">

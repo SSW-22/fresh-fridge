@@ -1,0 +1,7 @@
+.add-btn {
+  background-color: var(--color-green);
+  color: white;
+  border-style: none;
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+}
