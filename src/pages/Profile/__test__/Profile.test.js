@@ -1,14 +1,10 @@
-import { render as rtlRender, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import store from "../../../store/index";
+import { screen } from "@testing-library/react";
 import Profile from "../Profile";
-
-const render = (component) =>
-  rtlRender(<Provider store={store}>{component}</Provider>);
+import renderWithProviders from "../../../utils/test-utils";
 
 describe("Profile component test", () => {
   it("Profile component render loading", () => {
-    render(<Profile />);
+    renderWithProviders(<Profile />);
 
     const profileText = screen.getByText(/Expiry date reminders/i);
     expect(profileText).toBeInTheDocument();

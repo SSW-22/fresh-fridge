@@ -1,15 +1,33 @@
-import { render as rtlRender, screen } from "@testing-library/react";
-import { Provider } from "react-redux";
-import store from "./store/index";
+import { screen } from "@testing-library/react";
+import renderWithProviders from "./utils/test-utils";
 import App from "./App";
 
-const render = (component) =>
-  rtlRender(<Provider store={store}>{component}</Provider>);
+const initialUser = {
+  token: "token",
+  uid: "uid",
+  isLogIn: true,
+};
+
 describe("App", () => {
   it("nav not display when user not log in", async () => {
-    render(<App />);
-    const title = await screen.findByText(/fresh fridge/i);
+    renderWithProviders(<App />);
 
+    const title = await screen.findByText(/fresh fridge/i);
     expect(title).toBeInTheDocument();
+
+    const nav = screen.queryByRole(/nav/i);
+    expect(nav).not.toBeInTheDocument();
+  });
+
+  it("nav display when user log in", () => {
+    renderWithProviders(<App />, {
+      preloadedState: {
+        user: initialUser,
+      },
+    });
+    const title = screen.queryByText(/fresh fridge/i);
+    const nav = screen.getByRole(/nav/i);
+    expect(title).not.toBeInTheDocument();
+    expect(nav).toBeInTheDocument();
   });
 });
