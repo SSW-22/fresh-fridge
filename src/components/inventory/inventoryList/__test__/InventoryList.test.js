@@ -6,7 +6,7 @@ import dummyData from "../../../../../__dummy__/dummyData";
 describe("Inventory List", () => {
   it("render Inventory List", async () => {
     const initialItems = {
-      userId: "seybg",
+      userId: "test",
       items: dummyData,
     };
     renderWithProviders(<InventoryList />, {

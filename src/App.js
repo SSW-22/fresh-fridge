@@ -1,21 +1,36 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { useAppSelector } from "./hooks/react-redux-hooks";
+
 import "./App.css";
-import Navbar from "./components/Navbar";
+import Navbar from "./components/Navbar/Navbar";
 import Inventory from "./pages/Inventory/Inventory";
 import Grocery from "./pages/Grocery/Grocery";
 import Recipe from "./pages/Recipe/Recipe";
 import Profile from "./pages/Profile/Profile";
+import Home from "./pages/Home/Home";
 
 function App() {
+  const isLogin = useAppSelector((state) => state.user.isLogIn);
+
   return (
     <div className="App">
       <Router>
-        <Navbar />
+        {isLogin && <Navbar />}
         <Routes>
-          <Route path="/inventory" element={<Inventory />} />
-          <Route path="/grocery" element={<Grocery />} />
-          <Route path="/recipe" element={<Recipe />} />
-          <Route path="/profile" element={<Profile />} />
+          {!isLogin && <Route path="/" element={<Home />} />}
+          {isLogin && <Route path="/inventory" element={<Inventory />} />}
+          {isLogin && <Route path="/grocery" element={<Grocery />} />}
+          {isLogin && <Route path="/recipe" element={<Recipe />} />}
+          {isLogin && <Route path="/profile" element={<Profile />} />}
+          {isLogin && (
+            <Route path="*" element={<Navigate to="/inventory" replace />} />
+          )}
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Router>
     </div>

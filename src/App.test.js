@@ -1,13 +1,33 @@
-import { render } from "@testing-library/react";
+import { screen } from "@testing-library/react";
+import renderWithProviders from "./utils/test-utils";
 import App from "./App";
 
-describe("App", () => {
-  it("nav", () => {
-    const { container } = render(<App />);
+const initialUser = {
+  token: "token",
+  uid: "uid",
+  isLogIn: true,
+};
 
-    expect(container).toHaveTextContent("Inventory");
-    expect(container).toHaveTextContent("Grocery");
-    expect(container).toHaveTextContent("Recipe");
-    expect(container).toHaveTextContent("Profile");
+describe("App", () => {
+  it("nav not display when user not log in", async () => {
+    renderWithProviders(<App />);
+
+    const title = await screen.findByText(/fresh fridge/i);
+    expect(title).toBeInTheDocument();
+
+    const nav = screen.queryByRole(/nav/i);
+    expect(nav).not.toBeInTheDocument();
+  });
+
+  it("nav display when user log in", () => {
+    renderWithProviders(<App />, {
+      preloadedState: {
+        user: initialUser,
+      },
+    });
+    const title = screen.queryByText(/fresh fridge/i);
+    const nav = screen.getByRole(/nav/i);
+    expect(title).not.toBeInTheDocument();
+    expect(nav).toBeInTheDocument();
   });
 });

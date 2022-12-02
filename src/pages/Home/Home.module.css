@@ -1,0 +1,28 @@
+.home {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+}
+
+.title {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.title h1 {
+  font-size: 3.2rem;
+  font-weight: 700;
+}
+
+.footer {
+  font-size: 1.2rem;
+  font-weight: 400;
+  position: fixed;
+  bottom: 0;
+  margin-bottom: 2.5rem;
+}
