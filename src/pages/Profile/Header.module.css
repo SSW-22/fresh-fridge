@@ -1,6 +1,6 @@
 .header {
   display: flex;
-  background-color: #007838;
+  background-color: var(--color-green);
   border-style: none;
   border-radius: 2rem;
   height: 4rem;
