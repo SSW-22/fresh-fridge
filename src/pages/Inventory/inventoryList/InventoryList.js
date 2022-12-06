@@ -4,7 +4,6 @@ import ListItem from "../listItem/ListItem";
 
 function InventoryList() {
   const items = useAppSelector((state) => state.inventory.items);
-
   return (
     <ul>
       {items.map((item) => (

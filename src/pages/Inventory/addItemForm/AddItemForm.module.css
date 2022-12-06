@@ -1,0 +1,105 @@
+.modal-container {
+  margin-top: 4rem;
+  position: relative;
+  border: 1px solid var(--color-green);
+  max-height: 70vh;
+  padding: 2rem;
+  height: 100%;
+}
+
+.validation-warn {
+  color: red;
+  margin-top: 0.5rem;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 500px;
+  height: 100%;
+}
+.add-btn {
+  color: white;
+  background-color: green;
+  border-style: none;
+  width: 100px;
+  align-self: center;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 30px;
+}
+.close-btn {
+  position: absolute;
+  top: 0;
+  right: 5px;
+  border-style: none;
+  padding: 0.5rem;
+  background-color: transparent;
+  font-size: 2rem;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  padding: 0.5rem;
+  padding-left: 0;
+}
+
+.input-container input {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--color-green);
+  border-radius: 30px;
+}
+
+.input-container .input-divider {
+  display: flex;
+  align-items: center;
+}
+
+.input-container .btn-container {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+}
+
+.btn-container button {
+  padding: 0.5rem 1rem;
+  border-style: none;
+  border-radius: 50px;
+  margin: 0 0.5rem;
+  background-color: var(--color-green);
+  color: white;
+}
+.input-container .input-qty {
+  width: 100px;
+}
+
+.radio-btn-container {
+  position: relative;
+  display: flex;
+}
+
+.radio-btn-container input {
+  position: absolute;
+  visibility: hidden;
+}
+
+.radio-btn-container label {
+  padding: 1rem;
+  border-radius: 30px;
+  background-color: var(--color-green);
+  color: white;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  margin: 1rem;
+  cursor: pointer;
+}
+
+.radio-btn-container .radio-selected {
+  background-color: white;
+  color: black;
+}

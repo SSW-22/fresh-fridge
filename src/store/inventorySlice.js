@@ -12,14 +12,12 @@ const inventorySlice = createSlice({
     addItem(state, action) {
       const previousState = state;
       const newItem = action.payload;
-      // const existItem = previousState.inventory.items.find(
-      //   (item) => item.id === newItem.id,
-      // );
-
-      // if (!existItem) {
-      //   previousState.inventory.items.push(newItem);
-      // }
-      previousState.inventory.items.push(newItem);
+      const existItem = previousState.items.find(
+        (item) => item.id === newItem.id,
+      );
+      if (!existItem) {
+        previousState.items.push(newItem);
+      }
     },
   },
 });
