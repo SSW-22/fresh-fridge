@@ -12,6 +12,16 @@ describe("Inventory page", () => {
     expect(addItemForm).toBeInTheDocument();
   });
 
+  it("should render inventory list page when 'x' clicked from add item form", async () => {
+    renderWithProviders(<Inventory />);
+    const addItemBtn = screen.getByRole("button", { name: /Add item/i });
+    fireEvent.click(addItemBtn);
+    const closeBtn = screen.getByRole("button", { name: /x/i });
+    fireEvent.click(closeBtn);
+    const listItems = screen.getByTestId("inventory-component");
+    expect(listItems).toBeInTheDocument();
+  });
+
   it("display fridge,freezer and pantry when click dropdown btn under all food state", async () => {
     renderWithProviders(<Inventory />);
 

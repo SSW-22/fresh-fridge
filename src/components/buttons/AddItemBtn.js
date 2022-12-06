@@ -1,31 +1,23 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
-import AddItemForm from "../inventory/addItemForm/AddItemForm";
 import classes from "./AddItemBtn.module.css";
 
-function AddItemBtn({ type }) {
-  const [openForm, setOpenForm] = useState(false);
-
-  const modalHandler = () => {
-    setOpenForm(true);
+function AddItemBtn({ type, callbackFn }) {
+  const btnHandler = () => {
+    if (type === "inventory") {
+      callbackFn(true);
+    }
   };
-  if (type === "inventory") {
-    return (
-      <div className={classes["modal-container"]}>
-        {openForm && <AddItemForm setOpenForm={setOpenForm} />}
-        {!openForm && (
-          <button
-            type="button"
-            className={classes["add-btn"]}
-            onClick={modalHandler}
-            data-testid="add-btn"
-          >
-            Add Item
-          </button>
-        )}
-      </div>
-    );
-  }
+
+  return (
+    <button
+      type="button"
+      className={classes["add-btn"]}
+      onClick={btnHandler}
+      data-testid="add-btn"
+    >
+      Add Item
+    </button>
+  );
 }
 
 export default AddItemBtn;
