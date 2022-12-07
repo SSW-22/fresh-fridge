@@ -1,6 +1,12 @@
 import { screen, fireEvent } from "@testing-library/react";
 import renderWithProviders from "../../../utils/test-utils";
 import Inventory from "../Inventory";
+import dummyData from "../../../../__dummy__/dummyData";
+
+const initialItems = {
+  userId: "test",
+  items: dummyData,
+};
 
 describe("Inventory page", () => {
   it("should render add item form when 'add item btn' clicked", async () => {
@@ -89,5 +95,16 @@ describe("Inventory page", () => {
       target: { value: "asdf" },
     });
     expect(await screen.findByRole("textbox")).toHaveValue("asdf");
+  });
+
+  it("display edit move delete btns when list is clicked", async () => {
+    renderWithProviders(<Inventory category="0" searchString="" />, {
+      preloadedState: {
+        inventory: initialItems,
+      },
+    });
+    fireEvent.click(screen.getByText(/apple/i));
+
+    expect(await screen.findByText(/edit/i)).toBeInTheDocument();
   });
 });

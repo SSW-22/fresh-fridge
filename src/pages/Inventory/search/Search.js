@@ -3,7 +3,7 @@ import { BiSearch, BiArrowBack } from "react-icons/bi";
 import categoryObj from "../../../utils/categoryObj";
 import classes from "./Search.module.css";
 
-function Search({ category, searchText, setSearchText }) {
+function Search({ category, searchString, setSearchString }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const SearchClickHandler = (e) => {
@@ -13,11 +13,11 @@ function Search({ category, searchText, setSearchText }) {
 
   const onChangeHandler = (e) => {
     e.preventDefault();
-    setSearchText(e.target.value);
+    setSearchString(e.target.value);
   };
 
   return (
-    <div className={isSearchOpen && `${classes.search}`}>
+    <div className={isSearchOpen ? `${classes.search}` : ""}>
       {!isSearchOpen && (
         <button
           type="button"
@@ -42,7 +42,7 @@ function Search({ category, searchText, setSearchText }) {
             type="text"
             name="text"
             placeholder={`Search ${categoryObj[category]}`}
-            value={searchText}
+            value={searchString}
             onChange={onChangeHandler}
           />
           <BiSearch

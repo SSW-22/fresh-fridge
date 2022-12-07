@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import items from "../utils/dummyInventoryStore";
 
 const initialInventoryState = {
   userId: "",
-  items: [],
+  items,
 };
 
 const inventorySlice = createSlice({

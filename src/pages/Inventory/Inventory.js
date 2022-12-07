@@ -1,7 +1,6 @@
 import { useState } from "react";
 import AddItemBtn from "../../components/buttons/AddItemBtn";
 import InventoryList from "./inventoryList/InventoryList";
-import { useAppSelector } from "../../hooks/react-redux-hooks";
 import SearchBar from "./search/SearchBar";
 import classes from "./Inventory.module.css";
 import AddItemForm from "./addItemForm/AddItemForm";
@@ -12,32 +11,43 @@ function Inventory() {
   // save as ('0','1','2','3') refer to the categoryObj.js in utils
   const [category, setCategory] = useState("0");
   // search state from search component
-  const [searchText, setSearchText] = useState("");
+  const [searchString, setSearchString] = useState("");
   const [openForm, setOpenForm] = useState(false);
+  const [selectedId, setSelctedId] = useState("");
 
-  const items = useAppSelector((state) => state.inventory.items);
+  // const items = useAppSelector((state) => state.inventory.items);
   return (
     <div data-testid="inventory-component" className={classes.container}>
       <SearchBar
         category={category}
         setCategory={setCategory}
-        searchText={searchText}
-        setSearchText={setSearchText}
+        searchString={searchString}
+        setSearchString={setSearchString}
       />
-      {!openForm && items.length === 0 && (
-        <div className={classes["empty-page"]}>
-          <h1>
-            There is no food item here. <br /> click on the add item button to
-            store food.
-          </h1>
+      {!openForm && (
+        <InventoryList
+          category={category}
+          searchString={searchString}
+          selectedId={selectedId}
+          setSelctedId={setSelctedId}
+        />
+      )}
+      {!openForm && selectedId && (
+        <div className={classes["btn-box"]}>
+          <button type="button">edit</button>
+          <button type="button">move to</button>
+          <button type="button">delete</button>
         </div>
       )}
-      {!openForm && items.length > 0 && <InventoryList />}
-      {openForm ? (
+      {!openForm && !selectedId && (
+        <AddItemBtn type="inventory" callbackFn={setOpenForm} />
+      )}
+      {openForm && <AddItemForm setOpenForm={setOpenForm} />}
+      {/* {openForm ? (
         <AddItemForm setOpenForm={setOpenForm} />
       ) : (
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
-      )}
+      )} */}
     </div>
   );
 }
