@@ -36,6 +36,7 @@
   flex-direction: column;
   list-style: none;
   border-radius: 1rem;
+  background: #ffffff;
 }
 .category li {
   width: 100%;
