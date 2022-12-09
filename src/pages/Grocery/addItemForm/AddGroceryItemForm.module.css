@@ -1,0 +1,98 @@
+.grocery-add-form {
+  width: 100%;
+  border: solid 1.5px var(--color-green);
+  border-radius: 2rem;
+  height: 30rem;
+  margin-bottom: 1.5rem;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.title-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-box button {
+  border: none;
+  background-color: #ffffff;
+}
+
+.add-form {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.add-qty {
+  display: flex;
+  width: 100%;
+}
+.btn-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.btn-wrapper button {
+  height: 3rem;
+  width: 3.5rem;
+  background: var(--color-green);
+  border: solid 1.5px var(--color-green);
+  border-radius: 1.5rem;
+}
+
+.name-form,
+.qty-form {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.2rem;
+  gap: 1rem;
+}
+.qty-form {
+  width: 11rem;
+}
+
+.name-form input,
+.qty-form input {
+  height: 3rem;
+  padding: 0.4rem 1.4rem 0.4rem 1.4rem;
+  border: solid 1.5px var(--color-green);
+  border-radius: 1.5rem;
+}
+
+.name-form input {
+  width: 95%;
+}
+.qty-form input {
+  width: 9rem;
+}
+
+.err-msg-active {
+  visibility: visible;
+  color: #ff0000;
+  font-size: 1rem;
+}
+.err-msg {
+  visibility: hidden;
+  height: 1rem;
+}
+.submit-btn {
+  height: 3rem;
+  width: 10rem;
+  font-size: 1.2rem;
+  background-color: var(--color-green);
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  position: fixed;
+  bottom: 9.5rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+  border: solid 1.5rem var(--color-green);
+}

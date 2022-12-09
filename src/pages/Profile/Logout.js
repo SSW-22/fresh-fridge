@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import { signOutWithGoogle } from "../../firebase/googleAuth";
 import classes from "./Logout.module.css";
+import { inventoryActions } from "../../store/inventorySlice";
+import { groceryActions } from "../../store/grocerySlice";
 
 function Logout() {
   const dispatch = useDispatch();
@@ -10,6 +12,8 @@ function Logout() {
     try {
       signOutWithGoogle();
       dispatch(userActions.logOut());
+      dispatch(inventoryActions.deleteUser());
+      dispatch(groceryActions.deleteUser());
     } catch (error) {
       console.log(error);
     }

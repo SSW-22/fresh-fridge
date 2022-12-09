@@ -4,18 +4,19 @@ import { useDispatch } from "react-redux";
 import { RiLeafFill } from "react-icons/ri";
 import auth from "../../firebase/Firebase";
 import { userActions } from "../../store/userSlice";
+import { inventoryActions } from "../../store/inventorySlice";
 import SignIn from "./SignIn";
 import classes from "./Home.module.css";
 
 function Home() {
   const dispatch = useDispatch();
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     onAuthStateChanged(auth, (currentUser) => {
       if (currentUser) {
         const { accessToken, uid } = currentUser;
         dispatch(userActions.logIn({ accessToken, uid }));
+        dispatch(inventoryActions.addUser(uid));
         setIsLoading(false);
       } else {
         dispatch(userActions.logOut());
