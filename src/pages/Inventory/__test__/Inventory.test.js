@@ -105,6 +105,20 @@ describe("Inventory page", () => {
     });
     fireEvent.click(screen.getByText(/apple/i));
 
-    expect(await screen.findByText(/edit/i)).toBeInTheDocument();
+    expect(await screen.findByText("Edit")).toBeInTheDocument();
+    expect(await screen.findByText("Move to")).toBeInTheDocument();
+    expect(await screen.findByText("Delete")).toBeInTheDocument();
+  });
+
+  it("do not display edit move delete btns before list is clicked", async () => {
+    renderWithProviders(<Inventory category="0" searchString="" />, {
+      preloadedState: {
+        inventory: initialItems,
+      },
+    });
+
+    expect(screen.queryByText("Edit")).not.toBeInTheDocument();
+    expect(screen.queryByText("Move to")).not.toBeInTheDocument();
+    expect(screen.queryByText("Delete")).not.toBeInTheDocument();
   });
 });

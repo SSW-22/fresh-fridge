@@ -4,6 +4,7 @@ import InventoryList from "./inventoryList/InventoryList";
 import SearchBar from "./search/SearchBar";
 import classes from "./Inventory.module.css";
 import AddItemForm from "./addItemForm/AddItemForm";
+import EditMoveDeleteBtn from "../../components/editDeleteMoveBtn/EditMoveDeleteBtn";
 // import categoryObj from "../../utils/categoryObj";
 
 function Inventory() {
@@ -32,13 +33,7 @@ function Inventory() {
           setSelctedId={setSelctedId}
         />
       )}
-      {!openForm && selectedId && (
-        <div className={classes["btn-box"]}>
-          <button type="button">edit</button>
-          <button type="button">move to</button>
-          <button type="button">delete</button>
-        </div>
-      )}
+      {!openForm && selectedId && <EditMoveDeleteBtn />}
       {!openForm && !selectedId && (
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
       )}
