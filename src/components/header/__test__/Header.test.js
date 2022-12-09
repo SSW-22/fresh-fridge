@@ -4,6 +4,6 @@ import Header from "../Header";
 it("Profile componetn heading test", () => {
   render(<Header />);
 
-  const headerText = screen.getByText(/Settings/i);
+  const headerText = screen.getByTestId("header-title");
   expect(headerText).toBeInTheDocument();
 });

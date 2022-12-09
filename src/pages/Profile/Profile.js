@@ -1,11 +1,15 @@
-import Header from "./Header";
+import { BsFillPersonFill } from "react-icons/bs";
+import Header from "../../components/header/Header";
 import Logout from "./Logout";
 import classes from "./Profile.module.css";
 
 function Profile() {
   return (
     <div data-testid="profile-component" className={classes.container}>
-      <Header />
+      <Header>
+        <BsFillPersonFill size={23} color="#ffffff" />
+        <p>Settings</p>
+      </Header>
       <div className={classes["text-box"]}>
         <p className={classes["text-box-header"]}>Expiry date reminders</p>
         <p className={classes["text-box-p"]}>

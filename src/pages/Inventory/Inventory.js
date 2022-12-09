@@ -38,11 +38,6 @@ function Inventory() {
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
       )}
       {openForm && <AddItemForm setOpenForm={setOpenForm} />}
-      {/* {openForm ? (
-        <AddItemForm setOpenForm={setOpenForm} />
-      ) : (
-        <AddItemBtn type="inventory" callbackFn={setOpenForm} />
-      )} */}
     </div>
   );
 }

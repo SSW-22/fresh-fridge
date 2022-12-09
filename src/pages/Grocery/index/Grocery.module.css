@@ -7,15 +7,3 @@
   padding-bottom: 1rem;
   height: calc(100% - 5rem);
 }
-
-.empty-page {
-  height: 90%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.btn-box {
-  position: fixed;
-  bottom: 8rem;
-}
