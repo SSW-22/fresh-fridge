@@ -2,6 +2,8 @@ import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { signInWithGoogle } from "../../firebase/googleAuth";
 import { userActions } from "../../store/userSlice";
+import { inventoryActions } from "../../store/inventorySlice";
+import { groceryActions } from "../../store/grocerySlice";
 import classes from "./SignIn.module.css";
 
 function SignIn() {
@@ -13,8 +15,8 @@ function SignIn() {
       .then((result) => {
         const { user } = result;
         dispatch(userActions.logIn(user.accessToken, user.uid));
-        // sessionStorage.setItem("token", user.accessToken);
-        // sessionStorage.setItem("id", user.uid);
+        dispatch(inventoryActions.addUser(user.uid));
+        dispatch(groceryActions.addUser(user.uid));
         navigate("inventory");
       })
       .catch((error) => {

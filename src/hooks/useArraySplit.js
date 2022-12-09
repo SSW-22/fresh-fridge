@@ -5,6 +5,7 @@ const useArraySplit = (array, searchString) => {
   const searchArray = [];
 
   // push element to search array if element includes search string
+
   array.map(
     (element) =>
       element.name.includes(searchString) && searchArray.push(element),
