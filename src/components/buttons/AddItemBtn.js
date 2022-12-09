@@ -6,6 +6,9 @@ function AddItemBtn({ type, callbackFn }) {
     if (type === "inventory") {
       callbackFn(true);
     }
+    if (type === "grocery") {
+      callbackFn(true);
+    }
   };
 
   return (
