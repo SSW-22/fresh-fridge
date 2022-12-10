@@ -90,9 +90,6 @@
   justify-content: center;
   gap: 0.5rem;
   border-radius: 1.5rem;
-  position: fixed;
-  bottom: 9.5rem;
-  left: 50%;
-  transform: translate(-50%, 0);
+  align-self: center;
   border: solid 1.5rem var(--color-green);
 }

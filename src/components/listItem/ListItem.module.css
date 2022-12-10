@@ -23,15 +23,14 @@
 .textbox-name {
   font-size: 1.4rem;
 }
-.textbox-date {
-  font-size: 1.2rem;
-}
+
 #expired {
   color: #ff0000;
 }
 
 .textbox-right {
   display: flex;
+  align-items: center;
   font-size: 1.4rem;
   gap: 1.5rem;
 }
