@@ -1,8 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { groceryItems } from "../utils/dummyInventoryStore";
 
 const initialGroceryState = {
   userId: "",
-  items: [],
+  items: groceryItems,
 };
 
 const grocerySlice = createSlice({

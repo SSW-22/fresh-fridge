@@ -16,7 +16,6 @@ function Inventory() {
   const [openForm, setOpenForm] = useState(false);
   const [selectedId, setSelctedId] = useState("");
 
-  // const items = useAppSelector((state) => state.inventory.items);
   return (
     <div data-testid="inventory-component" className={classes.container}>
       <SearchBar

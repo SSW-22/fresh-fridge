@@ -14,6 +14,7 @@ function Grocery() {
         <FaShoppingCart size={20} color="#ffffff" />
         <p>Things to Buy</p>
       </Header>
+      {!openForm && <div>list</div>}
       {openForm && <AddGroceryItemForm setOpenForm={setOpenForm} />}
       {!openForm && <AddItemBtn type="grocery" callbackFn={setOpenForm} />}
     </div>
