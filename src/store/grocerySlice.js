@@ -1,13 +1,13 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { groceryItems } from "../utils/dummyInventoryStore";
+// import { groceryItems } from "../utils/dummyInventoryStore";
 
 const initialGroceryState = {
   userId: "",
-  items: groceryItems,
+  items: [],
 };
 
 const grocerySlice = createSlice({
-  name: "inventory",
+  name: "grocery",
   initialState: initialGroceryState,
   reducers: {
     addUser(state, action) {

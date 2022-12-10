@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../../hooks/react-redux-hooks";
 import useArraySplit from "../../../hooks/useArraySplit";
-import ListItem from "../listItem/ListItem";
+import ListItem from "../../../components/listItem/ListItem";
 import NoResult from "./NoResult";
 import classes from "./InventoryList.module.css";
 

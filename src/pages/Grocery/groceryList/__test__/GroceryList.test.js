@@ -21,7 +21,7 @@ describe("Grocery list component", () => {
       },
     });
 
-    expect(screen.getAllByText(/to buy/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/to buy/i)).toBeTruthy();
   });
 
   it("GroceryList display emty item statement when data is empty", () => {

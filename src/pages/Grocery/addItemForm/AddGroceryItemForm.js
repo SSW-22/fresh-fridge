@@ -37,6 +37,7 @@ function AddGroceryItemForm({ setOpenForm }) {
     nameRef.current.value = "";
     setQty(0);
     newItem = {};
+    setOpenForm(false);
   };
   const qtyChangeHandler = (e) => {
     e.preventDefault();

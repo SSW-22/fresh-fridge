@@ -35,3 +35,21 @@ describe("List item component in inventory", () => {
     expect(screen.getByText("Expired")).toBeInTheDocument();
   });
 });
+
+describe("List item component in grocery", () => {
+  it("list Item component render", () => {
+    render(
+      <Listitem
+        item={{
+          id: "861148dd-7051-4b80-9f0e-bf4fe8ce8ea6",
+          name: "test3",
+          qty: 2,
+        }}
+      />,
+    );
+
+    expect(screen.getByText("test3")).toBeInTheDocument();
+    expect(screen.getByText("2 to buy")).toBeInTheDocument();
+    expect(screen.queryByTestId("expiry-date")).not.toBeInTheDocument();
+  });
+});

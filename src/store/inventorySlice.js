@@ -1,5 +1,5 @@
 import { createSlice } from "@reduxjs/toolkit";
-// import items from "../utils/dummyInventoryStore";
+// import { items } from "../utils/dummyInventoryStore";
 
 const initialInventoryState = {
   userId: "",
