@@ -4,7 +4,7 @@ import InventoryList from "./inventoryList/InventoryList";
 import SearchBar from "./search/SearchBar";
 import classes from "./Inventory.module.css";
 import AddItemForm from "./addItemForm/AddItemForm";
-import EditMoveDeleteBtn from "../../components/editDeleteMoveBtn/EditMoveDeleteBtn";
+import EditMoveDelete from "../../components/editDeleteMove/EditMoveDelete";
 // import categoryObj from "../../utils/categoryObj";
 
 function Inventory() {
@@ -32,7 +32,7 @@ function Inventory() {
           setSelctedId={setSelctedId}
         />
       )}
-      {!openForm && selectedId && <EditMoveDeleteBtn />}
+      {!openForm && selectedId && <EditMoveDelete />}
       {!openForm && !selectedId && (
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
       )}

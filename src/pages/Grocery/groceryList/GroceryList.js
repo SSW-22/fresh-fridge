@@ -2,11 +2,12 @@ import { useAppSelector } from "../../../hooks/react-redux-hooks";
 import ListItem from "../../../components/listItem/ListItem";
 import classes from "./GroceryList.module.css";
 
-function GroceryListname({ selectedId, setSelctedId }) {
+function GroceryListname({ selectedId, setSelctedId, openForm }) {
   const items = useAppSelector((state) => state.grocery.items);
+
   return (
     <div data-testid="grocery-list" className={classes["grocery-list"]}>
-      {items.length === 0 && (
+      {items.length === 0 && !openForm && (
         <div className={classes["no-item"]}>
           <p>
             There is no grocery item here.

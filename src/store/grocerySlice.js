@@ -27,6 +27,9 @@ const grocerySlice = createSlice({
       );
       if (!existItem) {
         previousState.items.push(newItem);
+      } else {
+        existItem.name = newItem.name;
+        existItem.qty = newItem.qty;
       }
     },
   },

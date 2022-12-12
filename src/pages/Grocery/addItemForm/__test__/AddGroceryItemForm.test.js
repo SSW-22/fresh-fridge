@@ -22,3 +22,18 @@ describe("add form from grocery component", () => {
     expect(setStateMock).toHaveBeenCalledWith(false);
   });
 });
+
+describe("edit form from grocry component", () => {
+  it("render edit form", () => {
+    const setStateMock = jest.fn();
+    const useStateMock = (useState) => [useState, setStateMock];
+
+    jest.spyOn(React, "useState").mockImplementation(useStateMock);
+    renderWithProviders(
+      <AddGroceryItemForm setOpenForm={setStateMock} selectedId="id" />,
+    );
+
+    expect(screen.getByText("Edit item")).toBeInTheDocument();
+    expect(screen.getByText("Save changes")).toBeInTheDocument();
+  });
+});
