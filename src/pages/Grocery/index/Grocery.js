@@ -3,7 +3,7 @@ import { FaShoppingCart } from "react-icons/fa";
 import AddItemBtn from "../../../components/buttons/AddItemBtn";
 import Header from "../../../components/header/Header";
 import AddGroceryItemForm from "../addItemForm/AddGroceryItemForm";
-import EditMoveDeleteBtn from "../../../components/editDeleteMoveBtn/EditMoveDeleteBtn";
+import EditMoveDelete from "../../../components/editDeleteMove/EditMoveDelete";
 import GroceryList from "../groceryList/GroceryList";
 import classes from "./Grocery.module.css";
 
@@ -22,14 +22,15 @@ function Grocery() {
           <p>Things to Buy</p>
         </Header>
       </div>
-      {!openForm && (
-        <GroceryList selectedId={selectedId} setSelctedId={setSelctedId} />
-      )}
-      {!openForm && selectedId && <EditMoveDeleteBtn />}
+      <GroceryList
+        selectedId={selectedId}
+        setSelctedId={setSelctedId}
+        openForm={openForm}
+      />
+      {!openForm && selectedId && <EditMoveDelete selectedId={selectedId} />}
       {!openForm && !selectedId && (
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
       )}
-      {/* {!openForm && <AddItemBtn type="grocery" callbackFn={setOpenForm} />} */}
       {openForm && <AddGroceryItemForm setOpenForm={setOpenForm} />}
     </div>
   );

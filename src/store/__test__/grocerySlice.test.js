@@ -56,4 +56,31 @@ describe("grocery reducer test", () => {
       items: [{ id: "asdf", name: "test", qty: 5 }],
     });
   });
+
+  it("get exact item value when edit item", () => {
+    const previousState = {
+      userId: "test",
+      items: [
+        {
+          id: "asdf",
+          name: "test before",
+          qty: 1,
+        },
+      ],
+    };
+
+    expect(
+      groceryReducer(
+        previousState,
+        groceryActions.addItem({
+          id: "asdf",
+          name: "test after",
+          qty: 5,
+        }),
+      ),
+    ).toEqual({
+      userId: "test",
+      items: [{ id: "asdf", name: "test after", qty: 5 }],
+    });
+  });
 });

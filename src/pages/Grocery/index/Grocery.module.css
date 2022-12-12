@@ -7,9 +7,9 @@
   padding-bottom: 1rem;
   height: calc(100% - 5rem);
 }
-.between {
+/* .between {
   justify-content: space-between;
-}
+} */
 .header {
   height: 4rem;
   width: 100%;
