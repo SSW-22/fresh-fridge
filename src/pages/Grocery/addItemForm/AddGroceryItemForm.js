@@ -179,7 +179,7 @@ function AddGroceryItemForm({ setOpenForm, selectedId }) {
               type="submit"
               disabled={!nameValid || !numberValid}
             >
-              <IoAdd color="#ffffff" size={15} />
+              <IoAdd color="#ffffff" size={15} className={classes.btn} />
               Add item
             </button>
           )}

@@ -107,6 +107,9 @@
   border: solid 1.5rem var(--color-green);
   line-height: normal;
 }
+.btn {
+  transform: translateY(1px);
+}
 .edit-submit {
   width: 13rem;
 }
