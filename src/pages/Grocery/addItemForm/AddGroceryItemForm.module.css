@@ -105,6 +105,7 @@
   border-radius: 1.5rem;
   align-self: center;
   border: solid 1.5rem var(--color-green);
+  line-height: normal;
 }
 .edit-submit {
   width: 13rem;
