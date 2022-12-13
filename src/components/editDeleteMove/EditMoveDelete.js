@@ -2,9 +2,10 @@ import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { FiMove } from "react-icons/fi";
 import AddGroceryItemForm from "../../pages/Grocery/addItemForm/AddGroceryItemForm";
+import DeleteItem from "../deleteItem/DeleteItem";
 import classes from "./EditMoveDelete.module.css";
 
-function EditMoveDelete({ selectedId }) {
+function EditMoveDelete({ selectedId, setSelctedId }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isMoveOpen, setIsMoveOpen] = useState(false);
   const [isDeleteOpen, setIsDeleteOpen] = useState(false);
@@ -14,6 +15,13 @@ function EditMoveDelete({ selectedId }) {
         <AddGroceryItemForm
           setOpenForm={setIsEditOpen}
           selectedId={selectedId}
+        />
+      )}
+      {isDeleteOpen && (
+        <DeleteItem
+          setOpenForm={setIsDeleteOpen}
+          selectedId={selectedId}
+          setSelctedId={setSelctedId}
         />
       )}
       <div className={classes["edm-btn"]}>

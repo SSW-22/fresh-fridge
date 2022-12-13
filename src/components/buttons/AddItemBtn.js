@@ -1,4 +1,4 @@
-/* eslint-disable react/prop-types */
+import { IoAdd } from "react-icons/io5";
 import classes from "./AddItemBtn.module.css";
 
 function AddItemBtn({ type, callbackFn }) {
@@ -18,7 +18,8 @@ function AddItemBtn({ type, callbackFn }) {
       onClick={btnHandler}
       data-testid="add-btn"
     >
-      Add Item
+      <IoAdd color="#ffffff" size={15} />
+      Add item
     </button>
   );
 }

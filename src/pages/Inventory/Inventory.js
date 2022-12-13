@@ -32,7 +32,7 @@ function Inventory() {
           setSelctedId={setSelctedId}
         />
       )}
-      {!openForm && selectedId && <EditMoveDelete />}
+      {!openForm && selectedId && <EditMoveDelete selectedId={selectedId} />}
       {!openForm && !selectedId && (
         <AddItemBtn type="inventory" callbackFn={setOpenForm} />
       )}

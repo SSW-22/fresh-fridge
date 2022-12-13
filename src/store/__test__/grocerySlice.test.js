@@ -83,4 +83,35 @@ describe("grocery reducer test", () => {
       items: [{ id: "asdf", name: "test after", qty: 5 }],
     });
   });
+
+  it("get exact item value when delete item", () => {
+    const previousState = {
+      userId: "test",
+      items: [
+        {
+          id: "1",
+          name: "test 1",
+          qty: 1,
+        },
+        {
+          id: "2",
+          name: "test 2",
+          qty: 1,
+        },
+      ],
+    };
+
+    expect(
+      groceryReducer(previousState, groceryActions.deleteItem("1")),
+    ).toEqual({
+      userId: "test",
+      items: [
+        {
+          id: "2",
+          name: "test 2",
+          qty: 1,
+        },
+      ],
+    });
+  });
 });

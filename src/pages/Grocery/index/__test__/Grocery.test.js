@@ -13,12 +13,12 @@ describe("Grocery page", () => {
     renderWithProviders(<Grocery />);
 
     expect(screen.getByText("Things to Buy")).toBeInTheDocument();
-    expect(screen.getByText("Add Item")).toBeInTheDocument();
+    expect(screen.getByText("Add item")).toBeInTheDocument();
   });
 
   it("grocery renders add form when add btn clicked", async () => {
     renderWithProviders(<Grocery />);
-    fireEvent.click(screen.getByText("Add Item"));
+    fireEvent.click(screen.getByText("Add item"));
     expect(await screen.findByTestId("add-grocery-form")).toBeInTheDocument();
   });
 });

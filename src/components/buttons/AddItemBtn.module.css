@@ -1,10 +1,26 @@
-.add-btn {
+/* .add-btn {
   background-color: var(--color-green);
   color: white;
   border-style: none;
   padding: 0.5rem 1rem;
   border-radius: 20px;
+} */
+
+.add-btn {
+  height: 3rem;
+  width: 10rem;
+  font-size: 1.2rem;
+  background-color: var(--color-green);
   cursor: pointer;
   position: fixed;
-  bottom: 9.5rem;
+  bottom: 8.9rem;
+  color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 1.5rem;
+  align-self: center;
+  border: solid 1.5rem var(--color-green);
+  line-height: normal;
 }
