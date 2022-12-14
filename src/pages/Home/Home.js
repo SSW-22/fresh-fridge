@@ -2,7 +2,7 @@ import { onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { RiLeafFill } from "react-icons/ri";
-import auth from "../../firebase/Firebase";
+import { auth } from "../../firebase/Firebase";
 import { userActions } from "../../store/userSlice";
 import { inventoryActions } from "../../store/inventorySlice";
 import SignIn from "./SignIn";

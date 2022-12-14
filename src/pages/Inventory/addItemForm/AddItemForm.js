@@ -1,11 +1,16 @@
 import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
+import addDocument from "../../../firebase/addItemInventory";
 import { inventoryActions } from "../../../store/inventorySlice";
-import { useAppDispatch } from "../../../hooks/react-redux-hooks";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../hooks/react-redux-hooks";
 import classes from "./AddItemForm.module.css";
 
 function AddItemForm({ setOpenForm }) {
   const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.inventory);
   const nameRef = useRef();
   const expireDateRef = useRef();
   const [itemQty, setItemQty] = useState(0);
@@ -39,7 +44,7 @@ function AddItemForm({ setOpenForm }) {
     }
   };
   // submit for updating redux store and firebase store
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (
       nameRef.current.value === "" ||
@@ -49,6 +54,7 @@ function AddItemForm({ setOpenForm }) {
       checkValidation();
       return;
     }
+    const newData = {};
     const newItem = {
       id: uuidv4(),
       name: nameRef.current.value,
@@ -57,6 +63,12 @@ function AddItemForm({ setOpenForm }) {
       qty: itemQty,
     };
     dispatch(inventoryActions.addItem(newItem));
+    // update manually
+    const previousItems = [...userData.items] || [];
+    previousItems.push(newItem);
+    newData.userId = userData.userId;
+    newData.items = previousItems;
+    await addDocument("inventory", newData, newData.userId);
     setOpenForm(false);
   };
 
@@ -222,6 +234,7 @@ function AddItemForm({ setOpenForm }) {
         type="button"
         onClick={closeFormHandeler}
         className={classes["close-btn"]}
+        data-testid="submitBtn"
       >
         x
       </button>

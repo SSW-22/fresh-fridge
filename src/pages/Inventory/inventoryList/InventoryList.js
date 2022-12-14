@@ -7,7 +7,6 @@ import classes from "./InventoryList.module.css";
 function InventoryList({ category, searchString, selectedId, setSelctedId }) {
   const items = useAppSelector((state) => state.inventory.items);
   const [fridge, freezer, pantry] = useArraySplit(items, searchString);
-
   return (
     <div className={classes["inventory-list"]}>
       {items.length === 0 && (

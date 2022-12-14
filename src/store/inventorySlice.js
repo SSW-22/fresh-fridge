@@ -10,6 +10,11 @@ const inventorySlice = createSlice({
   name: "inventory",
   initialState: initialInventoryState,
   reducers: {
+    update(state, action) {
+      const previousState = state;
+      previousState.userId = action.payload.userId;
+      previousState.items = action.payload.items || [];
+    },
     addUser(state, action) {
       const previousState = state;
       previousState.userId = action.payload;

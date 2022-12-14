@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 // import moment from "moment";
 import { AiFillCheckCircle } from "react-icons/ai";
 import ExpiryDate from "./ExpiryDate";
@@ -26,13 +27,12 @@ function ListItem({ item, selectedId, setSelctedId }) {
         </div>
         <div className={classes["textbox-right"]}>
           <p>
-            {item.qty} {item.expireDate ? "in stock" : "to buy"}
+            {item.qty} {item.category ? "in stock" : "to buy"}
           </p>
           <AiFillCheckCircle
             size={17.5}
-            className={`${
-              selectedId === item.id ? classes["icon-selected"] : classes.icon
-            }`}
+            className={`${selectedId === item.id ? classes["icon-selected"] : classes.icon
+              }`}
           />
         </div>
       </div>
