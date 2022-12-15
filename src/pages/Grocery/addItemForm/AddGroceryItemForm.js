@@ -2,15 +2,18 @@ import { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MdOutlineClose, MdOutlineSaveAlt } from "react-icons/md";
 import { IoAdd, IoRemove } from "react-icons/io5";
+import addDocument from "../../../firebase/addItemInventory";
 import { groceryActions } from "../../../store/grocerySlice";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../hooks/react-redux-hooks";
 import classes from "./AddGroceryItemForm.module.css";
+import getNewItemArray from "../../../utils/getNewItemArray";
 
 function AddGroceryItemForm({ setOpenForm, selectedId }) {
   const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => state.grocery);
   const initialItem = useAppSelector((state) =>
     state.grocery.items.find((item) => item.id === selectedId),
   );
@@ -31,7 +34,7 @@ function AddGroceryItemForm({ setOpenForm, selectedId }) {
     setOpenForm(false);
   };
 
-  const submitHandler = (e) => {
+  const submitHandler = async (e) => {
     e.preventDefault();
     if (item.name === "" || item.qty < 1) {
       if (item.name === "") {
@@ -42,12 +45,24 @@ function AddGroceryItemForm({ setOpenForm, selectedId }) {
       }
       return;
     }
+
     let newItem = {
       id: selectedId || uuidv4(),
       name: item.name,
       qty: item.qty,
     };
+
     dispatch(groceryActions.addItem(newItem));
+
+    const previousItems = [...userData.items] || [];
+
+    const newData = {};
+
+    newData.userId = userData.userId;
+    newData.items = getNewItemArray(previousItems, newItem);
+
+    await addDocument("grocery", newData, newData.userId);
+
     setItem({ name: "", qty: 0 });
     newItem = {};
     setOpenForm(false);

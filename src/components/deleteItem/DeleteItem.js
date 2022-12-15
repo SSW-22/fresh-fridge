@@ -1,14 +1,33 @@
 import { MdOutlineClose } from "react-icons/md";
-import { useAppDispatch } from "../../hooks/react-redux-hooks";
+import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
 import { groceryActions } from "../../store/grocerySlice";
+import addDocument from "../../firebase/addItemInventory";
+import getNewItemArray from "../../utils/getNewItemArray";
 import classes from "./DeleteItem.module.css";
 
 function DeleteItem({ setOpenForm, selectedId, setSelctedId }) {
   const dispatch = useAppDispatch();
-  const deleteBtnHandler = (e) => {
+  const userData = useAppSelector((state) => state.grocery);
+
+  const deleteBtnHandler = async (e) => {
     e.preventDefault();
+
     dispatch(groceryActions.deleteItem(selectedId));
+
+    const previousItems = [...userData.items] || [];
+
+    const newData = {};
+    let newItem = {
+      id: selectedId,
+    };
+
+    newData.userId = userData.userId;
+    newData.items = getNewItemArray(previousItems, newItem);
+
+    await addDocument("grocery", newData, newData.userId);
+
     setSelctedId("");
+    newItem = {};
     setOpenForm(false);
   };
 

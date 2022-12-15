@@ -25,6 +25,7 @@ describe("App", () => {
         user: initialUser,
       },
     });
+
     const title = screen.queryByText(/fresh fridge/i);
     const nav = screen.getByRole(/nav/i);
     expect(title).not.toBeInTheDocument();

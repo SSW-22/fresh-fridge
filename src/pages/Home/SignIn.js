@@ -13,8 +13,11 @@ function SignIn() {
   const clickHandler = async () => {
     await signInWithGoogle()
       .then((result) => {
-        const { user } = result;
-        dispatch(userActions.logIn(user.accessToken, user.uid));
+        const user = {
+          token: result.user.accessToken,
+          uid: result.user.uid,
+        };
+        dispatch(userActions.logIn(user));
         dispatch(inventoryActions.addUser(user.uid));
         dispatch(groceryActions.addUser(user.uid));
         navigate("inventory");

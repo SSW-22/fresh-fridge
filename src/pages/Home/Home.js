@@ -5,6 +5,7 @@ import { RiLeafFill } from "react-icons/ri";
 import { auth } from "../../firebase/Firebase";
 import { userActions } from "../../store/userSlice";
 import { inventoryActions } from "../../store/inventorySlice";
+import { groceryActions } from "../../store/grocerySlice";
 import SignIn from "./SignIn";
 import classes from "./Home.module.css";
 
@@ -17,6 +18,7 @@ function Home() {
         const { accessToken, uid } = currentUser;
         dispatch(userActions.logIn({ accessToken, uid }));
         dispatch(inventoryActions.addUser(uid));
+        dispatch(groceryActions.addUser(uid));
         setIsLoading(false);
       } else {
         dispatch(userActions.logOut());

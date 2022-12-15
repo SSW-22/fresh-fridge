@@ -16,11 +16,14 @@ import Home from "./pages/Home/Home";
 import "./App.css";
 import checkUserItems from "./firebase/checkItems";
 import { inventoryActions } from "./store/inventorySlice";
+import { groceryActions } from "./store/grocerySlice";
 
 function App() {
   const dispatch = useAppDispatch();
   const isLogin = useAppSelector((state) => state.user.isLogIn);
-  const userId = useAppSelector((state) => state.inventory.userId);
+  // const userId = useAppSelector((state) => state.inventory.userId);
+  const userId = useAppSelector((state) => state.user.uid);
+
   useEffect(() => {
     if (isLogin) {
       const grabData = async () => {
@@ -30,6 +33,14 @@ function App() {
             items: res.items || [],
           };
           dispatch(inventoryActions.update(data));
+        });
+
+        await checkUserItems("grocery", userId).then((res) => {
+          const data = {
+            userId: res.userId || userId,
+            items: res.items || [],
+          };
+          dispatch(groceryActions.update(data));
         });
       };
       grabData();
