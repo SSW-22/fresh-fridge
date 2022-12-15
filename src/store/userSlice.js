@@ -11,13 +11,18 @@ const userSlice = createSlice({
   initialState: initialUserState,
   reducers: {
     logIn(state, action) {
-      let loginAuth = state;
-      loginAuth = {
-        token: action.payload.token,
-        uid: action.payload.uid,
-        isLogIn: true,
-      };
-      return loginAuth;
+      const previousState = state;
+      previousState.token = action.payload.token;
+      previousState.uid = action.payload.uid;
+      previousState.isLogIn = true;
+
+      // let loginAuth = state;
+      // loginAuth = {
+      //   token: action.payload.token,
+      //   uid: action.payload.uid,
+      //   isLogIn: true,
+      // };
+      // return loginAuth;
     },
     logOut(state) {
       let logoutAuth = state;
