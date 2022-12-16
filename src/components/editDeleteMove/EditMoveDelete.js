@@ -2,26 +2,57 @@ import { useState } from "react";
 import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { FiMove } from "react-icons/fi";
 import AddGroceryItemForm from "../../pages/Grocery/addItemForm/AddGroceryItemForm";
-import DeleteItem from "../deleteItem/DeleteItem";
+import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
+import getNewItemArray from "../../utils/getNewItemArray";
+import addDocument from "../../firebase/addItemInventory";
+import { inventoryActions } from "../../store/inventorySlice";
 import classes from "./EditMoveDelete.module.css";
+import { groceryActions } from "../../store/grocerySlice";
 
-function EditMoveDelete({ selectedId, setSelctedId }) {
+function EditMoveDelete({ type, selectedId, setSelctedId }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
   const [isMoveOpen, setIsMoveOpen] = useState(false);
-  const [isDeleteOpen, setIsDeleteOpen] = useState(false);
+  const dispatch = useAppDispatch();
+  const userData = useAppSelector((state) => {
+    if (type === "inventory") {
+      return state.inventory;
+    }
+    return state.grocery;
+  });
+
+  const deleteBtnHandler = async (e) => {
+    e.preventDefault();
+    const actionHandler =
+      type === "inventory"
+        ? inventoryActions.deleteItem(selectedId)
+        : groceryActions.deleteItem(selectedId);
+    dispatch(actionHandler);
+
+    const previousItems = [...userData.items] || [];
+
+    const newData = {};
+    const newItem = {
+      id: selectedId,
+    };
+
+    newData.userId = userData.userId;
+    newData.items = getNewItemArray(previousItems, newItem);
+
+    await addDocument(
+      type === "inventory" ? "inventory" : "grocery",
+      newData,
+      newData.userId,
+    );
+
+    setSelctedId("");
+  };
+
   return (
     <div className={classes.edm}>
-      {isEditOpen && (
+      {type === "grocery" && isEditOpen && (
         <AddGroceryItemForm
           setOpenForm={setIsEditOpen}
           selectedId={selectedId}
-        />
-      )}
-      {isDeleteOpen && (
-        <DeleteItem
-          setOpenForm={setIsDeleteOpen}
-          selectedId={selectedId}
-          setSelctedId={setSelctedId}
         />
       )}
       <div className={classes["edm-btn"]}>
@@ -31,7 +62,6 @@ function EditMoveDelete({ selectedId, setSelctedId }) {
           onClick={() => {
             setIsEditOpen(!isEditOpen);
             setIsMoveOpen(false);
-            setIsDeleteOpen(false);
           }}
         >
           <AiFillEdit size={14} />
@@ -43,19 +73,16 @@ function EditMoveDelete({ selectedId, setSelctedId }) {
           onClick={() => {
             setIsEditOpen(false);
             setIsMoveOpen(true);
-            setIsDeleteOpen(false);
           }}
         >
           <FiMove size={14} />
           <p>Move to</p>
         </button>
         <button
-          className={`${classes.btn} ${isDeleteOpen ? classes.active : ""}`}
+          className={classes.btn}
           type="button"
-          onClick={() => {
-            setIsEditOpen(false);
-            setIsMoveOpen(false);
-            setIsDeleteOpen(true);
+          onClick={(e) => {
+            deleteBtnHandler(e);
           }}
         >
           <AiFillDelete size={14} />

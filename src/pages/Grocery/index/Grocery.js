@@ -28,7 +28,11 @@ function Grocery() {
         openForm={openForm}
       />
       {!openForm && selectedId && (
-        <EditMoveDelete selectedId={selectedId} setSelctedId={setSelctedId} />
+        <EditMoveDelete
+          type="grocery"
+          selectedId={selectedId}
+          setSelctedId={setSelctedId}
+        />
       )}
       {!openForm && !selectedId && (
         <AddItemBtn type="grocery" callbackFn={setOpenForm} />
