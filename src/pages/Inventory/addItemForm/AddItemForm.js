@@ -1,5 +1,10 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
+import { MdOutlineClose } from "react-icons/md";
+import { FiMove } from "react-icons/fi";
+import { IoAdd, IoSnow } from "react-icons/io5";
+import { RiFridgeFill } from "react-icons/ri";
+import { BsFillInboxesFill } from "react-icons/bs";
 import addDocument from "../../../firebase/addItemInventory";
 import { inventoryActions } from "../../../store/inventorySlice";
 import getNewItemArray from "../../../utils/getNewItemArray";
@@ -9,19 +14,30 @@ import {
 } from "../../../hooks/react-redux-hooks";
 import classes from "./AddItemForm.module.css";
 
-function AddItemForm({ setOpenForm }) {
+function AddItemForm({ setOpenForm, type, selectedId }) {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.inventory);
   const nameRef = useRef();
   const expireDateRef = useRef();
   const [itemQty, setItemQty] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+  const initialGroceryItem = useAppSelector((state) =>
+    state.grocery.items.find((item) => item.id === selectedId),
+  );
+
+  useEffect(() => {
+    if (initialGroceryItem) {
+      nameRef.current.value = initialGroceryItem.name;
+      setItemQty(initialGroceryItem.qty);
+    }
+  }, [initialGroceryItem]);
 
   const [validation, setValidation] = useState({
     itemName: null,
     qty: null,
     addTo: null,
   });
+
   // closing form
   const closeFormHandeler = () => {
     setOpenForm(false);
@@ -56,7 +72,7 @@ function AddItemForm({ setOpenForm }) {
       return;
     }
     const newItem = {
-      id: uuidv4(),
+      id: selectedId || uuidv4(),
       name: nameRef.current.value,
       expireDate: expireDateRef.current.value,
       category: selectedOption,
@@ -110,137 +126,206 @@ function AddItemForm({ setOpenForm }) {
     }
   };
   return (
-    <div className={classes["modal-container"]}>
-      <h1>Add Item</h1>
-      <form
-        action=""
-        data-testid="adding-item-form"
-        onSubmit={submitHandler}
-        className={classes["form-container"]}
+    <div
+      className={`${classes["add-form-bg"]} ${
+        type === "grocery" ? classes["form-bg-grocery"] : ""
+      }`}
+    >
+      <div
+        className={`${classes["modal-container"]} ${
+          type === "grocery" ? classes["modal-container-grocery"] : ""
+        }`}
       >
-        <div>
-          <label htmlFor="name" className={classes["input-container"]}>
-            Name
-            <input
-              type="text"
-              id="name"
-              className={classes["input-name"]}
-              placeholder="Add name"
-              ref={nameRef}
-              onChange={() => {
-                if (nameRef.current.value.length > 0) {
-                  setValidation((prev) => {
-                    return { ...prev, itemName: false };
-                  });
-                }
-              }}
-            />
-            {validation.itemName && (
-              <p className={classes["validation-warn"]}>Plese enter a name</p>
-            )}
-          </label>
-          <label htmlFor="quantity" className={classes["input-container"]}>
-            Quantity
-            <div className={classes["input-divider"]}>
+        <div className={classes["title-box"]}>
+          {type === "grocery" ? <h1>Move Item</h1> : <h1>Add Item</h1>}
+          <button
+            type="button"
+            onClick={closeFormHandeler}
+            className={classes["close-btn"]}
+            data-testid="closeBtn"
+          >
+            <MdOutlineClose size={17} />
+          </button>
+        </div>
+        <form
+          action=""
+          data-testid="adding-item-form"
+          onSubmit={submitHandler}
+          className={classes["add-form"]}
+        >
+          <div>
+            <label htmlFor="name" className={classes["input-container"]}>
+              Name
               <input
                 type="text"
-                id="quantity"
-                value={itemQty}
-                onChange={qtyHandler}
-                className={classes["input-qty"]}
-                placeholder="Add quantity"
+                id="name"
+                className={classes["input-name"]}
+                placeholder="Add name"
+                ref={nameRef}
+                onChange={() => {
+                  if (nameRef.current.value.length > 0) {
+                    setValidation((prev) => {
+                      return { ...prev, itemName: false };
+                    });
+                  }
+                }}
               />
-              <div className={classes["btn-container"]}>
-                <button type="button" onClick={() => qtyBtnHandler("increase")}>
-                  +
-                </button>
-                <button type="button" onClick={() => qtyBtnHandler("decrease")}>
-                  -
-                </button>
-              </div>
-            </div>
-            {validation.qty && (
-              <p className={classes["validation-warn"]}>
-                Please enter a quantity
+              <p
+                className={`${
+                  validation.itemName
+                    ? classes["err-msg-active"]
+                    : classes["err-msg"]
+                }`}
+              >
+                Please enter a name
               </p>
-            )}
-          </label>
-          <label htmlFor="addTo" className={classes["input-container"]}>
-            Add to
-            <div className={classes["radio-btn-container"]}>
-              <label
-                htmlFor="addToFridge"
-                className={`
+            </label>
+          </div>
+          <div>
+            <label htmlFor="quantity" className={classes["input-container"]}>
+              Quantity
+              <div className={classes["input-qty-divider"]}>
+                <div className={classes["input-qty-box"]}>
+                  <input
+                    type="text"
+                    id="quantity"
+                    value={itemQty}
+                    onChange={qtyHandler}
+                    className={classes["input-qty"]}
+                    placeholder="Add quantity"
+                  />
+                  <div className={classes["btn-container"]}>
+                    <button
+                      type="button"
+                      onClick={() => qtyBtnHandler("increase")}
+                    >
+                      +
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => qtyBtnHandler("decrease")}
+                    >
+                      -
+                    </button>
+                  </div>
+                </div>
+                <p
+                  className={`${
+                    validation.qty
+                      ? classes["err-msg-active"]
+                      : classes["err-msg"]
+                  }`}
+                >
+                  Please enter a quantity
+                </p>
+              </div>
+            </label>
+          </div>
+          <div>
+            <label htmlFor="addTo" className={classes["input-container"]}>
+              Add to
+              <div className={classes["radio-btn-container"]}>
+                <label
+                  htmlFor="addToFridge"
+                  className={`
                 ${selectedOption === "1" ? classes["radio-selected"] : ""}`}
-              >
-                Fridge
-                <input
-                  type="radio"
-                  id="addToFridge"
-                  value="1"
-                  checked={selectedOption === "1"}
-                  onChange={radioHandler}
-                />
-              </label>
-              <label
-                htmlFor="addToFreezer"
-                className={`
+                >
+                  <RiFridgeFill
+                    size={15}
+                    color={`${selectedOption === "1" ? "#000000" : "#ffffff"}`}
+                  />
+                  Fridge
+                  <input
+                    type="radio"
+                    id="addToFridge"
+                    value="1"
+                    checked={selectedOption === "1"}
+                    onChange={radioHandler}
+                  />
+                </label>
+                <label
+                  htmlFor="addToFreezer"
+                  className={`
                 ${selectedOption === "2" ? classes["radio-selected"] : ""}`}
-              >
-                Freezer
-                <input
-                  type="radio"
-                  id="addToFreezer"
-                  value="2"
-                  onChange={radioHandler}
-                  checked={selectedOption === "2"}
-                />
-              </label>
-              <label
-                htmlFor="addToPantry"
-                className={`
+                >
+                  <IoSnow
+                    size={15}
+                    color={`${selectedOption === "2" ? "#000000" : "#ffffff"}`}
+                  />
+                  Freezer
+                  <input
+                    type="radio"
+                    id="addToFreezer"
+                    value="2"
+                    onChange={radioHandler}
+                    checked={selectedOption === "2"}
+                  />
+                </label>
+                <label
+                  htmlFor="addToPantry"
+                  className={`
                 ${selectedOption === "3" ? classes["radio-selected"] : ""}`}
+                >
+                  <BsFillInboxesFill
+                    size={15}
+                    color={`${selectedOption === "3" ? "#000000" : "#ffffff"}`}
+                  />
+                  Plantry
+                  <input
+                    type="radio"
+                    id="addToPantry"
+                    value="3"
+                    onChange={radioHandler}
+                    checked={selectedOption === "3"}
+                  />
+                </label>
+              </div>
+              <p
+                className={`${
+                  validation.addTo
+                    ? classes["err-msg-active"]
+                    : classes["err-msg"]
+                }`}
               >
-                Plantry
-                <input
-                  type="radio"
-                  id="addToPantry"
-                  value="3"
-                  onChange={radioHandler}
-                  checked={selectedOption === "3"}
-                />
-              </label>
-            </div>
-            {validation.addTo && (
-              <p className={classes["validation-warn"]}>
                 Please select a location
               </p>
-            )}
-          </label>
-          <label
-            htmlFor="expirationDate"
-            className={classes["input-container"]}
-          >
-            Expiration Date
-            <input type="date" id="expirationDate" ref={expireDateRef} />
-          </label>
-        </div>
-        <button
-          type="button"
-          onClick={submitHandler}
-          className={classes["add-btn"]}
-        >
-          Add Item
-        </button>
-      </form>
-      <button
-        type="button"
-        onClick={closeFormHandeler}
-        className={classes["close-btn"]}
-        data-testid="submitBtn"
-      >
-        x
-      </button>
+            </label>
+          </div>
+          <div>
+            <label
+              htmlFor="expirationDate"
+              className={classes["input-container"]}
+            >
+              Expiration Date
+              <input
+                type="date"
+                id="expirationDate"
+                ref={expireDateRef}
+                className={classes["date-input"]}
+              />
+            </label>
+          </div>
+          {type === "grocery" ? (
+            <button
+              type="button"
+              onClick={submitHandler}
+              className={`${classes["submit-btn"]} ${classes["move-submit"]}`}
+            >
+              <FiMove color="#ffffff" size={15} className={classes.btn} />
+              Move item
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={submitHandler}
+              className={classes["submit-btn"]}
+            >
+              <IoAdd color="#ffffff" size={15} className={classes.btn} />
+              Add item
+            </button>
+          )}
+        </form>
+      </div>
     </div>
   );
 }

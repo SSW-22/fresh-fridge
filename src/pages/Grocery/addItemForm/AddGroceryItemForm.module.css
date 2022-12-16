@@ -55,6 +55,7 @@
   background: var(--color-green);
   border: solid 1.5px var(--color-green);
   border-radius: 1.5rem;
+  line-height: unset;
 }
 
 .name-form,

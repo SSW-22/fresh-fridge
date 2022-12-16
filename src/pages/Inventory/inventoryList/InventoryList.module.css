@@ -13,16 +13,10 @@
 }
 .inventory-list {
   width: 100%;
-  padding-top: 3rem;
-  height: 100%;
   padding-bottom: 10rem;
 }
 
 .title {
   font-size: 1.6rem;
   margin-bottom: 1rem;
-}
-
-.list-box {
-  margin-bottom: 4rem;
 }

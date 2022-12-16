@@ -18,31 +18,34 @@ function Inventory() {
 
   return (
     <div data-testid="inventory-component" className={classes.container}>
-      <SearchBar
-        category={category}
-        setCategory={setCategory}
-        searchString={searchString}
-        setSearchString={setSearchString}
-      />
-      {!openForm && (
+      <div className={classes["inventory-header"]}>
+        <SearchBar
+          category={category}
+          setCategory={setCategory}
+          searchString={searchString}
+          setSearchString={setSearchString}
+        />
+      </div>
+      <div className={classes["inventory-list"]}>
         <InventoryList
           category={category}
           searchString={searchString}
           selectedId={selectedId}
           setSelctedId={setSelctedId}
         />
-      )}
-      {!openForm && selectedId && (
-        <EditMoveDelete
-          type="inventory"
-          selectedId={selectedId}
-          setSelctedId={setSelctedId}
-        />
-      )}
-      {!openForm && !selectedId && (
-        <AddItemBtn type="inventory" callbackFn={setOpenForm} />
-      )}
-      {openForm && <AddItemForm setOpenForm={setOpenForm} />}
+
+        {!openForm && selectedId && (
+          <EditMoveDelete
+            type="inventory"
+            selectedId={selectedId}
+            setSelctedId={setSelctedId}
+          />
+        )}
+        {!openForm && !selectedId && (
+          <AddItemBtn type="inventory" callbackFn={setOpenForm} />
+        )}
+        {openForm && <AddItemForm setOpenForm={setOpenForm} />}
+      </div>
     </div>
   );
 }

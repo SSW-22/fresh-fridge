@@ -22,7 +22,7 @@ describe("Inventory page", () => {
     renderWithProviders(<Inventory />);
     const addItemBtn = screen.getByRole("button", { name: /Add item/i });
     fireEvent.click(addItemBtn);
-    const closeBtn = screen.getByRole("button", { name: /x/i });
+    const closeBtn = screen.getByTestId("closeBtn");
     fireEvent.click(closeBtn);
     const listItems = screen.getByTestId("inventory-component");
     expect(listItems).toBeInTheDocument();
