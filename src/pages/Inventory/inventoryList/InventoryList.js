@@ -10,7 +10,10 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
   return (
     <div className={classes["inventory-list"]}>
       {items.length === 0 && (
-        <div data-testid="empty-state-test">
+        <div
+          data-testid="empty-state-test"
+          className={classes["empty-inventory"]}
+        >
           <p>
             There is no food item here. <br /> click on the add item button to
             store food.

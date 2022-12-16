@@ -8,8 +8,10 @@ const getNewItemArray = (previousItems, newItem) => {
     prevArray = prevArray.map((item) =>
       item.id !== existItem.id ? item : newItem,
     );
+    return prevArray;
   } else {
     prevArray = prevArray.filter((item) => item.id !== newItem.id);
+    return prevArray;
   }
   return prevArray;
 };

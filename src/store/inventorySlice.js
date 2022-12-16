@@ -34,6 +34,14 @@ const inventorySlice = createSlice({
         previousState.items.push(newItem);
       }
     },
+    deleteItem(state, action) {
+      const id = action.payload;
+      const previousState = state;
+      const existItem = state.items.find((item) => item.id === id);
+      if (existItem) {
+        previousState.items = state.items.filter((item) => item.id !== id);
+      }
+    },
   },
 });
 

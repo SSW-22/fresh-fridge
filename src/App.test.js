@@ -13,9 +13,8 @@ describe("App", () => {
     renderWithProviders(<App />);
 
     const title = await screen.findByText(/fresh fridge/i);
-    expect(title).toBeInTheDocument();
-
     const nav = screen.queryByRole(/nav/i);
+    expect(title).toBeInTheDocument();
     expect(nav).not.toBeInTheDocument();
   });
 

@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { v4 as uuidv4 } from "uuid";
 import addDocument from "../../../firebase/addItemInventory";
 import { inventoryActions } from "../../../store/inventorySlice";
+import getNewItemArray from "../../../utils/getNewItemArray";
 import {
   useAppDispatch,
   useAppSelector,
@@ -54,7 +55,6 @@ function AddItemForm({ setOpenForm }) {
       checkValidation();
       return;
     }
-    const newData = {};
     const newItem = {
       id: uuidv4(),
       name: nameRef.current.value,
@@ -64,10 +64,13 @@ function AddItemForm({ setOpenForm }) {
     };
     dispatch(inventoryActions.addItem(newItem));
     // update manually
+    const newData = {};
     const previousItems = [...userData.items] || [];
-    previousItems.push(newItem);
     newData.userId = userData.userId;
-    newData.items = previousItems;
+    newData.items = getNewItemArray(previousItems, newItem);
+    // previousItems.push(newItem);
+    // newData.userId = userData.userId;
+    // newData.items = previousItems;
     await addDocument("inventory", newData, newData.userId);
     setOpenForm(false);
   };
