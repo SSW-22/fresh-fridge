@@ -8,6 +8,7 @@ import addDocument from "../../firebase/addItemInventory";
 import { inventoryActions } from "../../store/inventorySlice";
 import classes from "./EditMoveDelete.module.css";
 import { groceryActions } from "../../store/grocerySlice";
+import AddItemForm from "../../pages/Inventory/addItemForm/AddItemForm";
 
 function EditMoveDelete({ type, selectedId, setSelctedId }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -52,6 +53,13 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
       {type === "grocery" && isEditOpen && (
         <AddGroceryItemForm
           setOpenForm={setIsEditOpen}
+          selectedId={selectedId}
+        />
+      )}
+      {type === "grocery" && isMoveOpen && (
+        <AddItemForm
+          setOpenForm={setIsMoveOpen}
+          type={type}
           selectedId={selectedId}
         />
       )}

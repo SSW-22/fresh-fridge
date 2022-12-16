@@ -16,28 +16,30 @@ function Grocery() {
       data-testid="grocery-component"
       className={`${classes.container} ${openForm ? classes.between : ""}`}
     >
-      <div className={classes.header}>
+      <div className={classes["grocery-header"]}>
         <Header>
           <FaShoppingCart size={20} color="#ffffff" />
           <p>Things to Buy</p>
         </Header>
       </div>
-      <GroceryList
-        selectedId={selectedId}
-        setSelctedId={setSelctedId}
-        openForm={openForm}
-      />
-      {!openForm && selectedId && (
-        <EditMoveDelete
-          type="grocery"
+      <div className={classes["grocery-list"]}>
+        <GroceryList
           selectedId={selectedId}
           setSelctedId={setSelctedId}
+          openForm={openForm}
         />
-      )}
-      {!openForm && !selectedId && (
-        <AddItemBtn type="grocery" callbackFn={setOpenForm} />
-      )}
-      {openForm && <AddGroceryItemForm setOpenForm={setOpenForm} />}
+        {!openForm && selectedId && (
+          <EditMoveDelete
+            type="grocery"
+            selectedId={selectedId}
+            setSelctedId={setSelctedId}
+          />
+        )}
+        {!openForm && !selectedId && (
+          <AddItemBtn type="grocery" callbackFn={setOpenForm} />
+        )}
+        {openForm && <AddGroceryItemForm setOpenForm={setOpenForm} />}
+      </div>
     </div>
   );
 }

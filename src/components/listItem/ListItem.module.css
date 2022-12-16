@@ -9,6 +9,10 @@
   display: flex;
   margin-bottom: 1.3rem;
 }
+.item-list:last-child {
+  margin-bottom: 3.3rem;
+}
+
 .list-textbox {
   display: flex;
   width: 100%;
