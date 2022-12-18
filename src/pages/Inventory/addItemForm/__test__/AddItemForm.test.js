@@ -1,4 +1,4 @@
-// import { screen } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
 // import user from "@testing-library/user-event";
 import Inventory from "../../Inventory";
 import renderWithProviders from "../../../../utils/test-utils";
@@ -31,5 +31,26 @@ describe("Inventory List", () => {
 
     // const newItem = await screen.findByText("apple");
     // expect(newItem).toBeVisible();
+
+    fireEvent.click(screen.getByRole("button", { name: /Add item/i }));
+    fireEvent.change(screen.getByPlaceholderText("Add name"), {
+      target: { value: "apple" },
+    });
+    fireEvent.change(screen.getByPlaceholderText("Add quantity"), {
+      target: { value: 5 },
+    });
+
+    fireEvent.click(screen.getByRole("button", { name: /Add item/i }));
+
+    expect(screen.queryByText("Please enter a name").classList).not.toContain(
+      "err-msg-active",
+    );
+    expect(
+      screen.queryByText("Please enter a quantity").classList,
+    ).not.toContain("err-msg-active");
+
+    expect(
+      screen.queryByText("Please select a location").classList,
+    ).not.toContain("err-msg-active");
   });
 });
