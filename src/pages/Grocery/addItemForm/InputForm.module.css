@@ -1,40 +1,4 @@
-.add-form-bg {
-  position: fixed;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: 0 3.5rem 0 3.5rem;
-  display: flex;
-  align-items: flex-end;
-  margin-bottom: 6.5rem;
-  /* background-color: rgba(55, 55, 55, 0.5); */
-}
-.grocery-add-form {
-  bottom: 6.5rem;
-  width: 100%;
-  border: solid 1.5px var(--color-green);
-  border-radius: 2rem;
-  height: 30rem;
-  padding: 2rem;
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-  background-color: #ffffff;
-}
-
-.title-box {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.title-box button {
-  border: none;
-  background-color: #ffffff;
-}
-
-/* .add-form {
+.add-form {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -105,12 +69,15 @@
   gap: 0.5rem;
   border-radius: 1.5rem;
   align-self: center;
-  border: solid 1.5rem var(--color-green);
+  border: solid 1.5px var(--color-green);
   line-height: normal;
+}
+.qty-btn {
+  pointer-events: none;
 }
 .btn {
   transform: translateY(1px);
 }
 .edit-submit {
   width: 13rem;
-} */
+}

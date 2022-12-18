@@ -101,72 +101,72 @@ const items = [
 
 const groceryItems = [
   {
-    id: 1,
+    id: "1",
     name: "apple",
     qty: 2,
   },
   {
-    id: 2,
+    id: "2",
     name: "banana",
     qty: 1,
   },
   {
-    id: 3,
+    id: "3",
     name: "orange",
     qty: 4,
   },
   {
-    id: 4,
+    id: "4",
     name: "fridge category",
     qty: 4,
   },
   {
-    id: 5,
+    id: "5",
     name: "freezer category",
     qty: 4,
   },
   {
-    id: 6,
+    id: "6",
     name: "pantry category",
     qty: 4,
   },
   {
-    id: 7,
+    id: "7",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 8,
+    id: "8",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 9,
+    id: "9",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 10,
+    id: "10",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 11,
+    id: "11",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 12,
+    id: "12",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 13,
+    id: "13",
     name: "dummy",
     qty: 4,
   },
   {
-    id: 14,
+    id: "14",
     name: "dummy",
     qty: 4,
   },

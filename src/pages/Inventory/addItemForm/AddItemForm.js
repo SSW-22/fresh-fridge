@@ -21,6 +21,7 @@ function AddItemForm({ setOpenForm, type, selectedId }) {
   const expireDateRef = useRef();
   const [itemQty, setItemQty] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
+
   const initialGroceryItem = useAppSelector((state) =>
     state.grocery.items.find((item) => item.id === selectedId),
   );
