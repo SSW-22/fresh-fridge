@@ -1,20 +1,17 @@
-// import { useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MdOutlineClose } from "react-icons/md";
-import addDocument from "../../../firebase/addItemInventory";
 import { groceryActions } from "../../../store/grocerySlice";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../hooks/react-redux-hooks";
 import classes from "./AddGroceryItemForm.module.css";
-import getNewItemArray from "../../../utils/getNewItemArray";
 import InputForm from "./InputForm";
+import firebaseDataUpdate from "../../../utils/firebaseDataUpdate";
 
 function AddGroceryItemForm({ setOpenForm, selectedId }) {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.grocery);
-  // const [isValid, setIsValid] = useState({ name: true, qty: true });
 
   const closeFormHandeler = () => {
     setOpenForm(false);
@@ -37,14 +34,7 @@ function AddGroceryItemForm({ setOpenForm, selectedId }) {
     };
 
     dispatch(groceryActions.addItem(newItem));
-    const previousItems = [...userData.items] || [];
-    const newData = {};
-
-    newData.userId = userData.userId;
-    newData.items = getNewItemArray(previousItems, newItem);
-
-    await addDocument("grocery", newData, newData.userId);
-
+    firebaseDataUpdate("grocery", userData, newItem);
     newItem = {};
     setOpenForm(false);
   };

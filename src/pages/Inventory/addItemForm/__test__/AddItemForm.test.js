@@ -49,8 +49,8 @@ describe("Inventory List", () => {
       screen.queryByText("Please enter a quantity").classList,
     ).not.toContain("err-msg-active");
 
-    expect(
-      screen.queryByText("Please select a location").classList,
-    ).not.toContain("err-msg-active");
+    expect(screen.queryByText("Please select a location").classList).toContain(
+      "err-msg-active",
+    );
   });
 });
