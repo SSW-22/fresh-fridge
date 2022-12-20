@@ -3,12 +3,13 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { FiMove } from "react-icons/fi";
 import AddGroceryItemForm from "../../pages/Grocery/addItemForm/AddGroceryItemForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
-import getNewItemArray from "../../utils/getNewItemArray";
-import addDocument from "../../firebase/addItemInventory";
+// import getNewItemArray from "../../utils/getNewItemArray";
+// import addDocument from "../../firebase/addItemInventory";
 import { inventoryActions } from "../../store/inventorySlice";
 import classes from "./EditMoveDelete.module.css";
 import { groceryActions } from "../../store/grocerySlice";
 import AddItemForm from "../../pages/Inventory/addItemForm/AddItemForm";
+import firebaseDataUpdate from "../../utils/firebaseDataUpdate";
 
 function EditMoveDelete({ type, selectedId, setSelctedId }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -27,24 +28,13 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
       type === "inventory"
         ? inventoryActions.deleteItem(selectedId)
         : groceryActions.deleteItem(selectedId);
+
     dispatch(actionHandler);
-
-    const previousItems = [...userData.items] || [];
-
-    const newData = {};
     const newItem = {
       id: selectedId,
     };
 
-    newData.userId = userData.userId;
-    newData.items = getNewItemArray(previousItems, newItem);
-
-    await addDocument(
-      type === "inventory" ? "inventory" : "grocery",
-      newData,
-      newData.userId,
-    );
-
+    firebaseDataUpdate(type, userData, newItem);
     setSelctedId("");
   };
 
@@ -61,6 +51,7 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
           setOpenForm={setIsMoveOpen}
           type={type}
           selectedId={selectedId}
+          setSelctedId={setSelctedId}
         />
       )}
       <div className={classes["edm-btn"]}>

@@ -5,18 +5,26 @@ import { FiMove } from "react-icons/fi";
 import { IoAdd, IoSnow } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { BsFillInboxesFill } from "react-icons/bs";
-import addDocument from "../../../firebase/addItemInventory";
+// import addDocument from "../../../firebase/addItemInventory";
 import { inventoryActions } from "../../../store/inventorySlice";
-import getNewItemArray from "../../../utils/getNewItemArray";
+import { groceryActions } from "../../../store/grocerySlice";
+// import getNewItemArray from "../../../utils/getNewItemArray";
+import firebaseDataUpdate from "../../../utils/firebaseDataUpdate";
 import {
   useAppDispatch,
   useAppSelector,
 } from "../../../hooks/react-redux-hooks";
 import classes from "./AddItemForm.module.css";
 
-function AddItemForm({ setOpenForm, type, selectedId }) {
+function AddItemForm({
+  setOpenForm,
+  type,
+  selectedId = null,
+  setSelctedId = null,
+}) {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.inventory);
+  const groceryUserData = useAppSelector((state) => state.grocery);
   const nameRef = useRef();
   const expireDateRef = useRef();
   const [itemQty, setItemQty] = useState(0);
@@ -81,14 +89,15 @@ function AddItemForm({ setOpenForm, type, selectedId }) {
     };
     dispatch(inventoryActions.addItem(newItem));
     // update manually
-    const newData = {};
-    const previousItems = [...userData.items] || [];
-    newData.userId = userData.userId;
-    newData.items = getNewItemArray(previousItems, newItem);
-    // previousItems.push(newItem);
-    // newData.userId = userData.userId;
-    // newData.items = previousItems;
-    await addDocument("inventory", newData, newData.userId);
+    firebaseDataUpdate("inventory", userData, newItem);
+    if (type === "grocery") {
+      dispatch(groceryActions.deleteItem(selectedId));
+      const newItem = {
+        id: selectedId,
+      };
+      firebaseDataUpdate("grocery", groceryUserData, newItem);
+      setSelctedId("");
+    }
     setOpenForm(false);
   };
 
@@ -271,7 +280,7 @@ function AddItemForm({ setOpenForm, type, selectedId }) {
                     size={15}
                     color={`${selectedOption === "3" ? "#000000" : "#ffffff"}`}
                   />
-                  Plantry
+                  Pantry
                   <input
                     type="radio"
                     id="addToPantry"
