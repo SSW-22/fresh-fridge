@@ -7,7 +7,7 @@ import {
 } from "../../../hooks/react-redux-hooks";
 import classes from "./AddGroceryItemForm.module.css";
 import InputForm from "./InputForm";
-import firebaseDataUpdate from "../../../utils/firebaseDataUpdate";
+import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
 
 function AddGroceryItemForm({ setOpenForm, selectedId }) {
   const dispatch = useAppDispatch();

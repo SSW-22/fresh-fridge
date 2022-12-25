@@ -9,7 +9,7 @@ import { BsFillInboxesFill } from "react-icons/bs";
 import { inventoryActions } from "../../../store/inventorySlice";
 import { groceryActions } from "../../../store/grocerySlice";
 // import getNewItemArray from "../../../utils/getNewItemArray";
-import firebaseDataUpdate from "../../../utils/firebaseDataUpdate";
+import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
 import {
   useAppDispatch,
   useAppSelector,

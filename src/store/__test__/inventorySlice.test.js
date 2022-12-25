@@ -5,6 +5,7 @@ describe("Inventory List", () => {
     expect(inventoryReducer(undefined, { type: undefined })).toEqual({
       userId: "",
       items: [],
+      reminderDays: "",
     });
   });
 
@@ -66,6 +67,18 @@ describe("Inventory List", () => {
           category: "inventory",
         },
       ],
+    });
+  });
+
+  it("expiry reminder date update", () => {
+    const previousState = { userId: "", items: [], reminderDays: "" };
+
+    expect(
+      inventoryReducer(previousState, inventoryActions.addReminderDays("3")),
+    ).toEqual({
+      userId: "",
+      items: [],
+      reminderDays: "3",
     });
   });
 });

@@ -1,9 +1,10 @@
-import { render, screen } from "@testing-library/react";
+import { screen } from "@testing-library/react";
 import Listitem from "../ListItem";
+import renderWithProviders from "../../../utils/test-utils";
 
 describe("List item component in inventory", () => {
   it("list Item component render", () => {
-    render(
+    renderWithProviders(
       <Listitem
         item={{
           category: "3",
@@ -20,7 +21,7 @@ describe("List item component in inventory", () => {
   });
 
   it("list Item component expiry date test 'expired'", () => {
-    render(
+    renderWithProviders(
       <Listitem
         item={{
           category: "3",
@@ -38,7 +39,7 @@ describe("List item component in inventory", () => {
 
 describe("List item component in grocery", () => {
   it("list Item component render", () => {
-    render(
+    renderWithProviders(
       <Listitem
         item={{
           id: "861148dd-7051-4b80-9f0e-bf4fe8ce8ea6",
