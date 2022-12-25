@@ -27,60 +27,64 @@ function Profile() {
   };
   return (
     <div data-testid="profile-component" className={classes.container}>
-      <Header>
-        <BsFillPersonFill size={23} color="#ffffff" />
-        <p>Settings</p>
-      </Header>
-      <div className={classes["text-box"]}>
-        <p className={classes["text-box-header"]}>Expiry date reminders</p>
-        <p className={classes["text-box-p"]}>
-          How many days in advance would you like to see a highlighted indicator
-          for your items that are about to expire?
-        </p>
-        <p className={classes["text-box-reminder"]}>
-          Currently, reminders <span>{userData.reminderDays || 0}</span> days
-          before
-        </p>
-        <form
-          onSubmit={submitHandler}
-          className={classes["submit-handler-box"]}
-        >
-          <p>Days</p>
-          <SetNumber
-            number={number}
-            setNumber={setNumber}
-            setIsValid={setIsValid}
-          />
-          <p
-            className={`${
-              isValid ? classes["err-msg"] : classes["err-msg-active"]
-            }`}
-          >
-            Please enter a quantity
+      <div className={classes["profile-header"]}>
+        <Header>
+          <BsFillPersonFill size={23} color="#ffffff" />
+          <p>Settings</p>
+        </Header>
+      </div>
+      <div className={classes["profile-main"]}>
+        <div className={classes["text-box"]}>
+          <p className={classes["text-box-header"]}>Expiry date reminders</p>
+          <p className={classes["text-box-p"]}>
+            How many days in advance would you like to see a highlighted
+            indicator for your items that are about to expire?
           </p>
-          <button
-            className={classes["submit-btn"]}
-            type="submit"
-            disabled={!isValid}
+          <p className={classes["text-box-reminder"]}>
+            Currently, reminders <span>{userData.reminderDays || 0}</span> days
+            before
+          </p>
+          <form
+            onSubmit={submitHandler}
+            className={classes["submit-handler-box"]}
           >
-            <MdOutlineSaveAlt color="#ffffff" size={15} />
-            Save changes
-          </button>
-        </form>
+            <p>Days</p>
+            <SetNumber
+              number={number}
+              setNumber={setNumber}
+              setIsValid={setIsValid}
+            />
+            <p
+              className={`${
+                isValid ? classes["err-msg"] : classes["err-msg-active"]
+              }`}
+            >
+              Please enter a quantity
+            </p>
+            <button
+              className={classes["submit-btn"]}
+              type="submit"
+              disabled={!isValid}
+            >
+              <MdOutlineSaveAlt color="#ffffff" size={15} />
+              Save changes
+            </button>
+          </form>
+        </div>
+        <div className={classes["btn-box"]}>
+          <p className={classes["text-box-header"]}>Logout</p>
+          <Logout />
+        </div>
+        <footer>
+          <ul>
+            <li>
+              <p>© 2022 freshfridge.ca</p>
+            </li>
+            <li>Contact Us</li>
+            <li>Third Party Licenses</li>
+          </ul>
+        </footer>
       </div>
-      <div className={classes["btn-box"]}>
-        <p className={classes["text-box-header"]}>Logout</p>
-        <Logout />
-      </div>
-      <footer>
-        <ul>
-          <li>
-            <p>© 2022 freshfridge.ca</p>
-          </li>
-          <li>Contact Us</li>
-          <li>Third Party Licenses</li>
-        </ul>
-      </footer>
     </div>
   );
 }
