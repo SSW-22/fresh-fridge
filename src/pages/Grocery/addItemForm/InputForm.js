@@ -157,17 +157,12 @@ function InputForm({ onSubmit, selectedId }) {
         <button
           className={`${classes["submit-btn"]} ${classes["edit-submit"]}`}
           type="submit"
-          //   disabled={!isValid.name || !isValid.qty}
         >
           <MdOutlineSaveAlt color="#ffffff" size={15} />
           Save changes
         </button>
       ) : (
-        <button
-          className={classes["submit-btn"]}
-          type="submit"
-          //   disabled={!isValid.name || !isValid.qty}
-        >
+        <button className={classes["submit-btn"]} type="submit">
           <IoAdd color="#ffffff" size={15} className={classes.btn} />
           Add item
         </button>

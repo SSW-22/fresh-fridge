@@ -31,6 +31,7 @@ function App() {
           const data = {
             userId: res.userId || userId,
             items: res.items || [],
+            reminderDays: res.reminderDays || "",
           };
           dispatch(inventoryActions.update(data));
         });
