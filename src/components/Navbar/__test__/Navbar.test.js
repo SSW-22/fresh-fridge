@@ -2,7 +2,7 @@ import { fireEvent, screen } from "@testing-library/react";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import Inventory from "../../../pages/Inventory/Inventory";
 import Grocery from "../../../pages/Grocery/index/Grocery";
-import Recipe from "../../../pages/Recipe/Recipe";
+import Recipe from "../../../pages/Recipe/index/Recipe";
 import Profile from "../../../pages/Profile/Profile";
 import Navbar from "../Navbar";
 import renderWithProviders from "../../../utils/test-utils";

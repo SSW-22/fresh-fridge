@@ -6,7 +6,9 @@ const firebaseDataUpdate = async (type, userData, newItem) => {
   const newData = {};
   newData.userId = userData.userId;
   newData.items = getNewItemArray(previousItems, newItem);
-  newData.reminderDays = userData.reminderDays;
+  if (type === "inventory") {
+    newData.reminderDays = userData.reminderDays;
+  }
 
   await addDocument(
     type === "inventory" ? "inventory" : "grocery",

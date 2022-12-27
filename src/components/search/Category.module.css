@@ -1,10 +1,8 @@
 .category {
   display: flex;
   width: 82%;
-  justify-content: space-between;
   background-color: var(--color-green);
   height: 4rem;
-  align-items: center;
   border-style: none;
   border-radius: 2rem;
   position: relative;

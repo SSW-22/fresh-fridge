@@ -1,7 +1,7 @@
 import { useAppSelector } from "../../../hooks/react-redux-hooks";
 import useArraySplit from "../../../hooks/useArraySplit";
 import ListItem from "../../../components/listItem/ListItem";
-import NoResult from "./NoResult";
+import NoResult from "../../../components/search/NoResult";
 import classes from "./InventoryList.module.css";
 
 function InventoryList({ category, searchString, selectedId, setSelctedId }) {
@@ -15,7 +15,7 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
           className={classes["empty-inventory"]}
         >
           <p>
-            There is no food item here. <br /> click on the add item button to
+            There is no food item here. <br /> Click on the add item button to
             store food.
           </p>
         </div>

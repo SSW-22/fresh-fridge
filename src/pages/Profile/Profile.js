@@ -12,18 +12,30 @@ import { firebaseReminderDateUpdate } from "../../utils/firebaseDataUpdate";
 function Profile() {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.inventory);
-  const [number, setNumber] = useState("");
-  const [isValid, setIsValid] = useState(true);
+  // const [number, setNumber] = useState("");
+  // const [isValid, setIsValid] = useState(true);
+  const [number, setNumber] = useState({ qty: "" });
+  const [isValid, setIsValid] = useState({
+    qty: true,
+  });
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (!number) {
-      setIsValid(false);
+
+    // if (!number) {
+    //   setIsValid(false);
+    //   return;
+    // }
+    if (!number.qty) {
+      setIsValid((prev) => {
+        return { ...prev, qty: false };
+      });
       return;
     }
-    dispatch(inventoryActions.addReminderDays(number));
-    firebaseReminderDateUpdate(userData, number);
-    setNumber("");
+
+    dispatch(inventoryActions.addReminderDays(number.qty));
+    firebaseReminderDateUpdate(userData, number.qty);
+    setNumber({ qty: "" });
   };
   return (
     <div data-testid="profile-component" className={classes.container}>
@@ -53,10 +65,11 @@ function Profile() {
               number={number}
               setNumber={setNumber}
               setIsValid={setIsValid}
+              type="profile"
             />
             <p
               className={`${
-                isValid ? classes["err-msg"] : classes["err-msg-active"]
+                isValid.qty ? classes["err-msg"] : classes["err-msg-active"]
               }`}
             >
               Please enter a quantity
@@ -64,7 +77,7 @@ function Profile() {
             <button
               className={classes["submit-btn"]}
               type="submit"
-              disabled={!isValid}
+              disabled={!isValid.qty}
             >
               <MdOutlineSaveAlt color="#ffffff" size={15} />
               Save changes

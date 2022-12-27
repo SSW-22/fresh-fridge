@@ -15,7 +15,7 @@ describe("Search in inventory component", () => {
   });
 
   it("display search bar when btn clicked", async () => {
-    render(<Search category="0" />);
+    render(<Search category="0" type="inventory" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -26,7 +26,7 @@ describe("Search in inventory component", () => {
   });
 
   it("display search bar when btn clicked under freezer prop", async () => {
-    render(<Search category="2" />);
+    render(<Search category="2" type="inventory" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -36,10 +36,33 @@ describe("Search in inventory component", () => {
   });
 
   it("close search bar when back btn clicked", async () => {
-    render(<Search />);
+    const setSearchString = jest.fn();
+    render(<Search setSearchString={setSearchString} type="inventory" />);
     fireEvent.click(screen.getByTestId("search-btn"));
     fireEvent.click(screen.getByTestId("back-btn"));
 
     expect(screen.queryByText(/search all food/i)).not.toBeInTheDocument();
+  });
+
+  it("display search bar when btn clicked in Recipe", async () => {
+    render(<Search category="0" type="recipe" />);
+    fireEvent.click(screen.getByTestId("search-btn"));
+
+    expect(await screen.findByRole("textbox")).toBeInTheDocument();
+    expect(
+      await screen.findByPlaceholderText(/search recipe with/i),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("search-btn")).not.toBeInTheDocument();
+  });
+
+  it("display search bar when btn clicked in saved recipes", async () => {
+    render(<Search category="1" type="recipe" />);
+    fireEvent.click(screen.getByTestId("search-btn"));
+
+    expect(await screen.findByRole("textbox")).toBeInTheDocument();
+    expect(
+      await screen.findByPlaceholderText(/search saved recipes/i),
+    ).toBeInTheDocument();
+    expect(screen.queryByTestId("search-btn")).not.toBeInTheDocument();
   });
 });

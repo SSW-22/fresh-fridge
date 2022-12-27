@@ -1,6 +1,8 @@
+import classes from "./NoResult.module.css";
+
 function NoResult() {
   return (
-    <div>
+    <div className={classes["no-item"]}>
       <p>No result found.</p>
     </div>
   );

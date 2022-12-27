@@ -1,45 +1,24 @@
-import { useState, useRef, useEffect } from "react";
 import { IoHomeSharp, IoSnow } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { BsFillInboxesFill } from "react-icons/bs";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
-import categoryObj from "../../../utils/categoryObj";
-import classes from "./Category.module.css";
+import { inventoryCategoryObj } from "../../utils/categoryObj";
+import classes from "./InventoryDropdown.module.css";
 
-function Category({ category, setCategory }) {
-  const [isOpen, setIsOpen] = useState(false);
-  const wrapperRef = useRef(null);
-
-  useEffect(() => {
-    function handleClickOutside(event) {
-      if (wrapperRef.current && !wrapperRef.current.contains(event.target)) {
-        setIsOpen(false);
-      }
-    }
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, [wrapperRef, setIsOpen]);
-
-  const dropdownBtnClickHandler = (e) => {
-    e.preventDefault();
-    setIsOpen((prev) => !prev);
-  };
-
-  const categoryClickHandler = (e) => {
-    e.preventDefault();
-    setCategory(e.target.getAttribute("data-type"));
-  };
-
+function InventoryDropdown({
+  category,
+  isOpen,
+  dropdownBtnClickHandler,
+  categoryClickHandler,
+}) {
   return (
-    <div className={classes.category} ref={wrapperRef}>
+    <div data-testid="inventory-dropdown" className={classes.dropdown}>
       <div className={classes.header}>
         {category === "0" && <IoHomeSharp size={20} color="#ffffff" />}
         {category === "1" && <RiFridgeFill size={20} color="#ffffff" />}
         {category === "2" && <IoSnow size={20} color="#ffffff" />}
         {category === "3" && <BsFillInboxesFill size={20} color="#ffffff" />}
-        <p>{categoryObj[category]}</p>
+        <p>{inventoryCategoryObj[category]}</p>
       </div>
       <div>
         <button
@@ -123,4 +102,4 @@ function Category({ category, setCategory }) {
   );
 }
 
-export default Category;
+export default InventoryDropdown;

@@ -29,12 +29,12 @@
   font-size: 1.2rem;
   gap: 1rem;
 }
-.qty-form {
+/* .qty-form {
   width: 11rem;
-}
+} */
 
-.name-form input,
-.qty-form input {
+.name-form input
+/* .qty-form input  */ {
   height: 3rem;
   padding: 0.4rem 1.4rem 0.4rem 1.4rem;
   border: solid 1.5px var(--color-green);
@@ -44,9 +44,9 @@
 .name-form input {
   width: 95%;
 }
-.qty-form input {
+/* .qty-form input {
   width: 9rem;
-}
+} */
 
 .err-msg-active {
   visibility: visible;

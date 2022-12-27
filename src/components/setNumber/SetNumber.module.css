@@ -3,20 +3,20 @@
   align-items: center;
   gap: 0.5rem;
 }
-.hidden-label {
-  height: 0;
-  font-size: 1.2rem;
-  padding: 0 1rem 0 1rem;
-  visibility: hidden;
-}
-input {
-  display: inline;
+
+.container input {
   height: 3rem;
-  width: 100%;
   border: solid 1.5px var(--color-green);
   border-radius: 1.5rem;
   padding: 0 1rem 0 1rem;
   font-size: 1.2rem;
+}
+
+.qty-small-input {
+  width: 10rem;
+}
+.qty-large-input {
+  width: 15rem;
 }
 
 .btn-wrapper {
