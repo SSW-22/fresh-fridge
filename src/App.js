@@ -10,7 +10,7 @@ import { useAppDispatch, useAppSelector } from "./hooks/react-redux-hooks";
 import Navbar from "./components/Navbar/Navbar";
 import Inventory from "./pages/Inventory/Inventory";
 import Grocery from "./pages/Grocery/index/Grocery";
-import Recipe from "./pages/Recipe/Recipe";
+import Recipe from "./pages/Recipe/index/Recipe";
 import Profile from "./pages/Profile/Profile";
 import Home from "./pages/Home/Home";
 import "./App.css";

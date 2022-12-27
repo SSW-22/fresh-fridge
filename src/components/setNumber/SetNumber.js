@@ -1,52 +1,67 @@
 import { IoAdd, IoRemove } from "react-icons/io5";
 import classes from "./SetNumber.module.css";
 
-function SetNumber({ number, setNumber, setIsValid }) {
+function SetNumber({ number, setNumber, setIsValid, type }) {
+  const placeholder =
+    type === "profile" ? "Add number of days" : "Add quantity";
+  const qtyValidHandler = (qty) => {
+    const currentNumber = +qty || 0;
+    if (currentNumber < 1) {
+      setIsValid((prev) => {
+        return { ...prev, qty: false };
+      });
+    } else {
+      setIsValid((prev) => {
+        return { ...prev, qty: true };
+      });
+    }
+  };
+
   const qtyChangeHandler = (e) => {
     e.preventDefault();
-    let value = e.target.value.replace(/\D/g, "");
-    if (!value || value === "0") {
-      value = "";
-      setIsValid(false);
-    } else {
-      setIsValid(true);
-    }
-    setNumber(value);
+    const value = e.target.value.replace(/\D/g, "");
+
+    qtyValidHandler(value);
+    setNumber((prev) => {
+      return { ...prev, qty: value };
+    });
   };
 
   const qtyBtnClickHandler = (e) => {
     e.preventDefault();
-    let currentNumber = +number || 0;
+    let currentNumber = +number.qty || 0;
     if (e.target.id === "increase") {
       currentNumber += 1;
     }
     if (e.target.id === "decrease") {
-      if (number > 0) {
+      if (number.qty > 0) {
         currentNumber -= 1;
       }
     }
     if (currentNumber < 1) {
-      setIsValid(false);
       currentNumber = "";
-    } else {
-      setIsValid(true);
     }
-    setNumber(currentNumber.toString());
+    qtyValidHandler(currentNumber);
+    setNumber((prev) => {
+      return { ...prev, qty: currentNumber.toString() };
+    });
   };
   return (
     <div className={classes.container}>
-      <label htmlFor="qty">
-        <div className={classes["hidden-label"]} aria-hidden="true">
-          Add number of days
-        </div>
+      <label htmlFor="qty" className={classes.qty}>
         <input
           name="qty"
           id="qty"
           type="text"
-          placeholder="Add number of days"
-          value={number}
+          placeholder={placeholder}
+          value={number.qty}
           onChange={qtyChangeHandler}
           data-testid="number-input-test"
+          className={
+            placeholder.length < 15
+              ? `${classes["qty-small-input"]}`
+              : `${classes["qty-large-input"]}`
+          }
         />
       </label>
       <div className={classes["btn-wrapper"]}>

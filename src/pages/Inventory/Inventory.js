@@ -1,11 +1,10 @@
 import { useState } from "react";
 import AddItemBtn from "../../components/buttons/AddItemBtn";
 import InventoryList from "./inventoryList/InventoryList";
-import SearchBar from "./search/SearchBar";
+import SearchBar from "../../components/search/SearchBar";
 import classes from "./Inventory.module.css";
 import AddItemForm from "./addItemForm/AddItemForm";
 import EditMoveDelete from "../../components/editDeleteMove/EditMoveDelete";
-// import categoryObj from "../../utils/categoryObj";
 
 function Inventory() {
   // state for category select(allFood, fridge, freezer, pantry)
@@ -22,8 +21,8 @@ function Inventory() {
         <SearchBar
           category={category}
           setCategory={setCategory}
-          searchString={searchString}
           setSearchString={setSearchString}
+          type="inventory"
         />
       </div>
       <div className={classes["inventory-list"]}>

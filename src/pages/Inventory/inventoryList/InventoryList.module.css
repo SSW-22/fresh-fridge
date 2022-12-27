@@ -1,15 +1,28 @@
 .empty-inventory {
-  display: flex;
+  /* display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
   height: 100%;
   font-size: 1.2rem;
-  text-align: center;
+  text-align: center; */
+
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  font-size: 1.2rem;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  z-index: -1;
 }
 
 .empty-inventory p {
-  line-height: 1.5;
+  line-height: 2rem;
+  text-align: center;
 }
 .inventory-list {
   width: 100%;

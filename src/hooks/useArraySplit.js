@@ -8,7 +8,8 @@ const useArraySplit = (array, searchString) => {
 
   array.map(
     (element) =>
-      element.name.includes(searchString) && searchArray.push(element),
+      element.name.toLowerCase().includes(searchString.toLowerCase()) &&
+      searchArray.push(element),
   );
 
   if (searchArray.length > 0) {
