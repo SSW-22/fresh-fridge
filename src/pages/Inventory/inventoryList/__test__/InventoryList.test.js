@@ -100,7 +100,7 @@ describe("item not found message in inventory component", () => {
         inventory: initialItems,
       },
     });
-    expect(screen.getByText(/No result found./i)).toBeInTheDocument();
+    expect(screen.getByText(/No results found./i)).toBeInTheDocument();
   });
 
   it("Item not found message when there are no search item in the fridge store", () => {
@@ -109,7 +109,7 @@ describe("item not found message in inventory component", () => {
         inventory: initialItems,
       },
     });
-    expect(screen.getByText(/No result found./i)).toBeInTheDocument();
+    expect(screen.getByText(/No results found./i)).toBeInTheDocument();
   });
 
   it("Item not found message when there are no search item in the freezer store", () => {
@@ -118,7 +118,7 @@ describe("item not found message in inventory component", () => {
         inventory: initialItems,
       },
     });
-    expect(screen.getByText(/No result found./i)).toBeInTheDocument();
+    expect(screen.getByText(/No results found./i)).toBeInTheDocument();
   });
 
   it("Item not found message when there are no search item in the pantry store", () => {
@@ -127,6 +127,6 @@ describe("item not found message in inventory component", () => {
         inventory: initialItems,
       },
     });
-    expect(screen.getByText(/No result found./i)).toBeInTheDocument();
+    expect(screen.getByText(/No results found./i)).toBeInTheDocument();
   });
 });

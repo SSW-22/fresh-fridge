@@ -1,21 +1,26 @@
-import { screen, render, fireEvent } from "@testing-library/react";
+import { screen, fireEvent } from "@testing-library/react";
+import renderWithProviders from "../../../utils/test-utils";
 import Search from "../Search";
+import apiCall from "../../../api/recipe-api";
+
+jest.mock("../../../api/recipe-api", () => jest.fn());
 
 describe("Search in inventory component", () => {
+  afterEach(jest.clearAllMocks);
   it("search component render", () => {
-    render(<Search />);
+    renderWithProviders(<Search />);
 
     expect(screen.getByRole("button")).toBeInTheDocument();
   });
 
   it("do not display search bar when btn not clicked", () => {
-    render(<Search />);
+    renderWithProviders(<Search />);
 
     expect(screen.queryByText(/search all food/i)).not.toBeInTheDocument();
   });
 
   it("display search bar when btn clicked", async () => {
-    render(<Search category="0" type="inventory" />);
+    renderWithProviders(<Search category="0" type="inventory" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -26,7 +31,7 @@ describe("Search in inventory component", () => {
   });
 
   it("display search bar when btn clicked under freezer prop", async () => {
-    render(<Search category="2" type="inventory" />);
+    renderWithProviders(<Search category="2" type="inventory" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -37,7 +42,9 @@ describe("Search in inventory component", () => {
 
   it("close search bar when back btn clicked", async () => {
     const setSearchString = jest.fn();
-    render(<Search setSearchString={setSearchString} type="inventory" />);
+    renderWithProviders(
+      <Search setSearchString={setSearchString} type="inventory" />,
+    );
     fireEvent.click(screen.getByTestId("search-btn"));
     fireEvent.click(screen.getByTestId("back-btn"));
 
@@ -45,7 +52,7 @@ describe("Search in inventory component", () => {
   });
 
   it("display search bar when btn clicked in Recipe", async () => {
-    render(<Search category="0" type="recipe" />);
+    renderWithProviders(<Search category="0" type="recipe" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -56,7 +63,7 @@ describe("Search in inventory component", () => {
   });
 
   it("display search bar when btn clicked in saved recipes", async () => {
-    render(<Search category="1" type="recipe" />);
+    renderWithProviders(<Search category="1" type="recipe" />);
     fireEvent.click(screen.getByTestId("search-btn"));
 
     expect(await screen.findByRole("textbox")).toBeInTheDocument();
@@ -64,5 +71,32 @@ describe("Search in inventory component", () => {
       await screen.findByPlaceholderText(/search saved recipes/i),
     ).toBeInTheDocument();
     expect(screen.queryByTestId("search-btn")).not.toBeInTheDocument();
+  });
+
+  it("search btn get data from api call in recipe component", async () => {
+    const setSearchString = jest.fn();
+    apiCall.mockImplementation(() => [
+      {
+        canonical_id: 1,
+        name: "name",
+        instructions: "instructions",
+        video_url: "video_url",
+        sections: "sections",
+      },
+    ]);
+    renderWithProviders(
+      <Search category="0" setSearchString={setSearchString} type="recipe" />,
+    );
+
+    fireEvent.click(screen.getByTestId("search-btn"));
+    fireEvent.change(screen.getByPlaceholderText("Search recipe with"), {
+      target: { value: "test" },
+    });
+    fireEvent.click(screen.getByTestId("submit-test"));
+
+    expect(screen.getByPlaceholderText("Search recipe with")).toHaveValue(
+      "test",
+    );
+    expect(apiCall).toHaveBeenCalled();
   });
 });

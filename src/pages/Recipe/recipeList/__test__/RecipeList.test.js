@@ -23,4 +23,14 @@ describe("recipe list test", () => {
 
     expect(screen.getByTestId("recipe-no-item-test")).toBeInTheDocument();
   });
+
+  it("no result message when no item exist", () => {
+    renderWithProviders(<RecipeList searchString="test" />, {
+      preloadedState: {
+        recipe: dummyItems,
+      },
+    });
+
+    expect(screen.getByText(/No results found/i)).toBeInTheDocument();
+  });
 });

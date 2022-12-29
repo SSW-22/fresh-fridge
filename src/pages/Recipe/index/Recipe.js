@@ -1,7 +1,6 @@
 import { useState } from "react";
 import SearchBar from "../../../components/search/SearchBar";
 import RecipeList from "../recipeList/RecipeList";
-// import apiCall from "../../api/recipe-api";
 import classes from "./Recipe.module.css";
 
 function Recipe() {
@@ -16,11 +15,10 @@ function Recipe() {
           category={category}
           setCategory={setCategory}
           setSearchString={setSearchString}
-          type="Recipe"
+          type="recipe"
         />
-        <RecipeList />
+        <RecipeList searchString={searchString} category={category} />
       </div>
-      <div className={classes["recipe-list"]}>{searchString}</div>
     </div>
   );
 }
