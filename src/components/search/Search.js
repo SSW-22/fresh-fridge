@@ -9,10 +9,11 @@ import {
 } from "../../utils/categoryObj";
 import classes from "./Search.module.css";
 
-function Search({ category, setSearchString, type }) {
+function Search({ category, setSearchString, searchString, type }) {
   const dispatch = useAppDispatch();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [inputString, setInputString] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const SearchClickHandler = (e) => {
     e.preventDefault();
@@ -40,20 +41,27 @@ function Search({ category, setSearchString, type }) {
     }
     if (type === "recipe" && category === "0") {
       // name,instructions,video_url,canonical_id,sections
-      if (inputString.replace(/\s/g, "").length > 0) {
+      if (
+        inputString.replace(/\s/g, "").length > 0 &&
+        searchString !== inputString
+      ) {
         try {
+          setIsLoading(true);
           let data = await apiCall(inputString);
-          data = data.map((item) => {
-            return {
-              canonical_id: item.canonical_id,
-              name: item.name,
-              instructions: item.instructions,
-              video_url: item.original_video_url,
-              sections: item.sections,
-            };
-          });
+          data = data
+            .map((item) => {
+              return {
+                canonical_id: item.canonical_id,
+                name: item.name,
+                instructions: item.instructions,
+                video_url: item.original_video_url,
+                sections: item.sections,
+              };
+            })
+            .filter((item) => item.instructions && item.sections);
           setSearchString(inputString);
           dispatch(recipeActions.searchRecipe(data));
+          setIsLoading(false);
         } catch (error) {
           console.log(error);
         }
@@ -105,6 +113,7 @@ function Search({ category, setSearchString, type }) {
             type="submit"
             className={classes["submit-btn"]}
             data-testid="submit-test"
+            disabled={isLoading}
           >
             <BiSearch
               className={classes["search-textbox-icon"]}

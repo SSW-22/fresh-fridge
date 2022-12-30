@@ -15,8 +15,11 @@ function Recipe() {
           category={category}
           setCategory={setCategory}
           setSearchString={setSearchString}
+          searchString={searchString}
           type="recipe"
         />
+      </div>
+      <div className={classes["recipe-list"]}>
         <RecipeList searchString={searchString} category={category} />
       </div>
     </div>

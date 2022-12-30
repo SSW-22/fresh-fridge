@@ -15,5 +15,6 @@ describe("recipe list item", () => {
     renderWithProviders(<RecipeListItem category="0" item={item} />);
 
     expect(screen.getByText("name")).toBeInTheDocument();
+    expect(screen.getByRole("button")).toBeInTheDocument();
   });
 });

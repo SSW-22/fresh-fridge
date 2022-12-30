@@ -1,4 +1,4 @@
-import { screen, fireEvent } from "@testing-library/react";
+import { screen, fireEvent, waitFor } from "@testing-library/react";
 import renderWithProviders from "../../../utils/test-utils";
 import Search from "../Search";
 import apiCall from "../../../api/recipe-api";
@@ -97,6 +97,8 @@ describe("Search in inventory component", () => {
     expect(screen.getByPlaceholderText("Search recipe with")).toHaveValue(
       "test",
     );
-    expect(apiCall).toHaveBeenCalled();
+    await waitFor(() => {
+      expect(apiCall).toHaveBeenCalled();
+    });
   });
 });
