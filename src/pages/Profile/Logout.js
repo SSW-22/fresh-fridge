@@ -21,7 +21,12 @@ function Logout() {
   };
 
   return (
-    <button type="button" onClick={logOutHandler} className={classes.btn}>
+    <button
+      type="button"
+      onClick={logOutHandler}
+      className={classes.btn}
+      data-testid="logout-test"
+    >
       <FiLogOut color="#ffffff" size={12} />
       Logout
     </button>

@@ -12,6 +12,7 @@
   position: fixed;
   padding: 5.5rem 3.5rem 3rem 3.5rem;
   background-color: #ffffff;
+  z-index: 99;
 }
 .recipe-list {
   width: 100%;

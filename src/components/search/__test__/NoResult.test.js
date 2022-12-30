@@ -4,6 +4,6 @@ import NoResult from "../NoResult";
 describe("NotFound componet", () => {
   it("Not Found component render", () => {
     render(<NoResult />);
-    expect(screen.getByText(/no result found/i)).toBeInTheDocument();
+    expect(screen.getByText(/no results found/i)).toBeInTheDocument();
   });
 });
