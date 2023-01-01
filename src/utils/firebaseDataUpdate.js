@@ -10,11 +10,7 @@ const firebaseDataUpdate = async (type, userData, newItem) => {
     newData.reminderDays = userData.reminderDays;
   }
 
-  await addDocument(
-    type === "inventory" ? "inventory" : "grocery",
-    newData,
-    newData.userId,
-  );
+  await addDocument(type, newData, newData.userId);
 };
 
 const firebaseReminderDateUpdate = async (userData, newReminderDays) => {

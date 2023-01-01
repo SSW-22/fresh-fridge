@@ -1,11 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 import ExtendItem from "./ExtendItem";
 import classes from "./RecipeListItem.module.css";
 
-function RecipeListItem({ key, category, item }) {
+function RecipeListItem({ category, item }) {
   const [isOpen, setIsOpen] = useState(false);
-
+  useEffect(() => {
+    setIsOpen(false);
+  }, [category]);
   const extBtnClickHandler = (e) => {
     e.preventDefault();
     setIsOpen((prev) => !prev);
@@ -13,7 +15,6 @@ function RecipeListItem({ key, category, item }) {
 
   return (
     <li
-      key={key}
       data-testid="list-item-test"
       className={`${classes["item-list"]} ${
         isOpen && classes["item-list-open"]

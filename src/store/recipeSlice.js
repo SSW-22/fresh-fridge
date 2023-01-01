@@ -11,7 +11,7 @@ const recipeSlice = createSlice({
   reducers: {
     update(state, action) {
       const previousState = state;
-      previousState.savedRecipes = action.payload || [];
+      previousState.savedRecipes = action.payload.items || [];
     },
     searchRecipe(state, action) {
       const previousState = state;

@@ -3,33 +3,24 @@ import renderWithProviders from "../../../../utils/test-utils";
 import RecipeList from "../RecipeList";
 
 describe("recipe list test", () => {
-  const dummyItems = {
-    savedRecipes: [],
-    searchedRecipes: [],
-  };
+  const searchedRecipes = [];
 
   it("recipe list render", () => {
-    renderWithProviders(<RecipeList />);
+    renderWithProviders(<RecipeList recipes={searchedRecipes} />);
 
     expect(screen.getByTestId("recipe-list-test")).toBeInTheDocument();
   });
 
   it("no item message when no item exist", () => {
-    renderWithProviders(<RecipeList />, {
-      preloadedState: {
-        recipe: dummyItems,
-      },
-    });
+    renderWithProviders(<RecipeList recipes={searchedRecipes} />);
 
     expect(screen.getByTestId("recipe-no-item-test")).toBeInTheDocument();
   });
 
   it("no result message when no item exist", () => {
-    renderWithProviders(<RecipeList searchString="test" />, {
-      preloadedState: {
-        recipe: dummyItems,
-      },
-    });
+    renderWithProviders(
+      <RecipeList searchString="test" recipes={searchedRecipes} />,
+    );
 
     expect(screen.getByText(/No results found/i)).toBeInTheDocument();
   });

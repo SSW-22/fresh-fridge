@@ -1,9 +1,37 @@
 import { v4 as uuidv4 } from "uuid";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../hooks/react-redux-hooks";
+import { recipeActions } from "../../../store/recipeSlice";
+import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
 import classes from "./ExtendItem.module.css";
 
 function ExtendItem({ item, category }) {
+  const dispatch = useAppDispatch();
+
+  const userData = {
+    userId: useAppSelector((state) => state.user.uid),
+    items: useAppSelector((state) => state.recipe.savedRecipes),
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (category === "0") {
+      dispatch(recipeActions.addItem(item));
+      firebaseDataUpdate("recipe", userData, item);
+    }
+    if (category === "1") {
+      dispatch(recipeActions.deleteItem(item.id));
+      const newItem = {
+        id: item.id,
+      };
+
+      firebaseDataUpdate("recipe", userData, newItem);
+    }
+  };
   return (
     <div className={classes["ext-item"]}>
       {item.video_url && (
@@ -37,14 +65,21 @@ function ExtendItem({ item, category }) {
           ))}
         </ol>
       </div>
-      {category === "0" && (
-        <button type="button" className={classes["summit-btn"]}>
+      {category === "0" ? (
+        <button
+          type="button"
+          className={classes["summit-btn"]}
+          onClick={submitHandler}
+        >
           <MdOutlineSaveAlt color="#ffffff" size={15} />
           Save recipe
         </button>
-      )}
-      {category === "1" && (
-        <button type="button" className={classes["summit-btn"]}>
+      ) : (
+        <button
+          type="button"
+          className={classes["summit-btn"]}
+          onClick={submitHandler}
+        >
           <AiFillDelete color="#ffffff" size={15} />
           Delete recipe
         </button>

@@ -23,7 +23,13 @@ describe("recipe reducer test", () => {
     const previousState = { savedRecipes: [], searchedRecipes: [] };
 
     expect(
-      recipeReducer(previousState, recipeActions.update([1, 2, 3])),
+      recipeReducer(
+        previousState,
+        recipeActions.update({
+          userId: "id",
+          items: [1, 2, 3],
+        }),
+      ),
     ).toEqual({
       savedRecipes: [1, 2, 3],
       searchedRecipes: [],

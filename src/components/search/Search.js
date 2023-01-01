@@ -51,7 +51,7 @@ function Search({ category, setSearchString, searchString, type }) {
           data = data
             .map((item) => {
               return {
-                canonical_id: item.canonical_id,
+                id: item.canonical_id,
                 name: item.name,
                 instructions: item.instructions,
                 video_url: item.original_video_url,
