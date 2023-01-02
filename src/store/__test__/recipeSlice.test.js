@@ -1,21 +1,20 @@
-import recipeReducer, { recipeActions } from "../recipeSlice";
+import recipeReducer, { recipeActions, searchRecipe } from "../recipeSlice";
 
 describe("recipe reducer test", () => {
   it("initial", () => {
     expect(recipeReducer(undefined, { type: undefined })).toEqual({
       savedRecipes: [],
       searchedRecipes: [],
+      status: "idle",
     });
   });
 
   it("get search recipes", () => {
     const previousState = { savedRecipes: [], searchedRecipes: [] };
 
-    expect(
-      recipeReducer(previousState, recipeActions.searchRecipe([1, 2, 3])),
-    ).toEqual({
+    expect(recipeReducer(previousState, searchRecipe(""))).toEqual({
       savedRecipes: [],
-      searchedRecipes: [1, 2, 3],
+      searchedRecipes: [],
     });
   });
 
