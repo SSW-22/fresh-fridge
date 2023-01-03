@@ -1,9 +1,42 @@
+import { useEffect } from "react";
 import { v4 as uuidv4 } from "uuid";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { AiFillDelete } from "react-icons/ai";
+import {
+  useAppDispatch,
+  useAppSelector,
+} from "../../../hooks/react-redux-hooks";
+import { recipeActions, addRecipe } from "../../../store/recipeSlice";
+import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
 import classes from "./ExtendItem.module.css";
 
 function ExtendItem({ item, category }) {
+  const dispatch = useAppDispatch();
+  const status = useAppSelector((state) => state.recipe.savedRecipes.status);
+
+  useEffect(() => {
+    dispatch(recipeActions.setStatusIdle());
+  }, [dispatch]);
+  const userData = {
+    userId: useAppSelector((state) => state.user.uid),
+    items: useAppSelector((state) => state.recipe.savedRecipes.recipes),
+  };
+
+  const submitHandler = (e) => {
+    e.preventDefault();
+    if (category === "0") {
+      dispatch(addRecipe({ item, userData }));
+      // dispatch(recipeActions.addItem(item));
+      // firebaseDataUpdate("recipe", userData, item);
+    }
+    if (category === "1") {
+      dispatch(recipeActions.deleteItem(item.id));
+      const newItem = {
+        id: item.id,
+      };
+      firebaseDataUpdate("recipe", userData, newItem);
+    }
+  };
   return (
     <div className={classes["ext-item"]}>
       {item.video_url && (
@@ -37,16 +70,35 @@ function ExtendItem({ item, category }) {
           ))}
         </ol>
       </div>
-      {category === "0" && (
-        <button type="button" className={classes["summit-btn"]}>
-          <MdOutlineSaveAlt color="#ffffff" size={15} />
-          Save recipe
+      {category === "0" ? (
+        <button
+          type="button"
+          className={classes["summit-btn"]}
+          onClick={submitHandler}
+          disabled={status === "succeeded"}
+        >
+          {status === "succeeded" ? (
+            <div className={classes["submit-btn-text"]}>
+              <MdOutlineSaveAlt color="#ffffff" size={15} />
+              Recipe Saved
+            </div>
+          ) : (
+            <div className={classes["submit-btn-text"]}>
+              <MdOutlineSaveAlt color="#ffffff" size={15} />
+              Save recipe
+            </div>
+          )}
         </button>
-      )}
-      {category === "1" && (
-        <button type="button" className={classes["summit-btn"]}>
-          <AiFillDelete color="#ffffff" size={15} />
-          Delete recipe
+      ) : (
+        <button
+          type="button"
+          className={classes["summit-btn"]}
+          onClick={submitHandler}
+        >
+          <div className={classes["submit-btn-text"]}>
+            <AiFillDelete color="#ffffff" size={15} />
+            Delete recipe
+          </div>
         </button>
       )}
     </div>

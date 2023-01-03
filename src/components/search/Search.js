@@ -1,8 +1,8 @@
 import { useState } from "react";
 import { BiSearch, BiArrowBack } from "react-icons/bi";
-import { useAppDispatch } from "../../hooks/react-redux-hooks";
-import { recipeActions } from "../../store/recipeSlice";
-import apiCall from "../../api/recipe-api";
+import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
+import { searchRecipe } from "../../store/recipeSlice";
+// import apiCall from "../../api/recipe-api";
 import {
   inventoryCategoryObj,
   recipeCategoryObj,
@@ -13,7 +13,8 @@ function Search({ category, setSearchString, searchString, type }) {
   const dispatch = useAppDispatch();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [inputString, setInputString] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
+
+  const status = useAppSelector((state) => state.recipe.searchedRecipes.status);
 
   const SearchClickHandler = (e) => {
     e.preventDefault();
@@ -46,22 +47,22 @@ function Search({ category, setSearchString, searchString, type }) {
         searchString !== inputString
       ) {
         try {
-          setIsLoading(true);
-          let data = await apiCall(inputString);
-          data = data
-            .map((item) => {
-              return {
-                canonical_id: item.canonical_id,
-                name: item.name,
-                instructions: item.instructions,
-                video_url: item.original_video_url,
-                sections: item.sections,
-              };
-            })
-            .filter((item) => item.instructions && item.sections);
+          // let data = await apiCall(inputString);
+          // data = data
+          //   .map((item) => {
+          //     return {
+          //       id: item.canonical_id,
+          //       name: item.name,
+          //       instructions: item.instructions,
+          //       video_url: item.original_video_url,
+          //       sections: item.sections,
+          //     };
+          //   })
+          //   .filter((item) => item.instructions && item.sections);
           setSearchString(inputString);
-          dispatch(recipeActions.searchRecipe(data));
-          setIsLoading(false);
+          // dispatch(recipeActions.searchRecipe(data));
+          // console.log(searchString);
+          dispatch(searchRecipe(inputString));
         } catch (error) {
           console.log(error);
         }
@@ -113,7 +114,7 @@ function Search({ category, setSearchString, searchString, type }) {
             type="submit"
             className={classes["submit-btn"]}
             data-testid="submit-test"
-            disabled={isLoading}
+            disabled={status === "loading"}
           >
             <BiSearch
               className={classes["search-textbox-icon"]}

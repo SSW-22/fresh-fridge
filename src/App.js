@@ -17,6 +17,7 @@ import "./App.css";
 import checkUserItems from "./firebase/checkItems";
 import { inventoryActions } from "./store/inventorySlice";
 import { groceryActions } from "./store/grocerySlice";
+import { recipeActions } from "./store/recipeSlice";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -42,6 +43,14 @@ function App() {
             items: res.items || [],
           };
           dispatch(groceryActions.update(data));
+        });
+
+        await checkUserItems("recipe", userId).then((res) => {
+          const data = {
+            userId: res.userId || userId,
+            items: res.items || [],
+          };
+          dispatch(recipeActions.update(data));
         });
       };
       grabData();

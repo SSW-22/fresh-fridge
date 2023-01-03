@@ -46,12 +46,20 @@
   font-size: 1.2rem;
   background-color: var(--color-green);
   color: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
   border-radius: 1.5rem;
   align-self: center;
   border: solid 1.5px var(--color-green);
   line-height: normal;
+}
+.summit-btn:disabled {
+  background-color: #bfbfbf;
+  border: solid 1.5px #bfbfbf;
+}
+
+.submit-btn-text {
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
 }

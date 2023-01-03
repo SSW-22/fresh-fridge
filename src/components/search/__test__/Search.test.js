@@ -75,15 +75,15 @@ describe("Search in inventory component", () => {
 
   it("search btn get data from api call in recipe component", async () => {
     const setSearchString = jest.fn();
-    apiCall.mockImplementation(() => [
-      {
-        canonical_id: 1,
-        name: "name",
-        instructions: "instructions",
-        video_url: "video_url",
-        sections: "sections",
-      },
-    ]);
+    // apiCall.mockImplementation(() => [
+    //   {
+    //     canonical_id: 1,
+    //     name: "name",
+    //     instructions: "instructions",
+    //     video_url: "video_url",
+    //     sections: "sections",
+    //   },
+    // ]);
     renderWithProviders(
       <Search category="0" setSearchString={setSearchString} type="recipe" />,
     );
