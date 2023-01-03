@@ -5,7 +5,7 @@ import { useAppSelector } from "../../../hooks/react-redux-hooks";
 import classes from "./RecipeList.module.css";
 
 function RecipeList({ searchString, category, recipes }) {
-  const status = useAppSelector((state) => state.recipe.status);
+  const status = useAppSelector((state) => state.recipe.searchedRecipes.status);
   return (
     <div data-testid="recipe-list-test" className={classes["recipe-list"]}>
       {status === "loading" ? (

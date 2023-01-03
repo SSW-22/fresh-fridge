@@ -14,7 +14,7 @@ function Search({ category, setSearchString, searchString, type }) {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [inputString, setInputString] = useState("");
 
-  const status = useAppSelector((state) => state.recipe.status);
+  const status = useAppSelector((state) => state.recipe.searchedRecipes.status);
 
   const SearchClickHandler = (e) => {
     e.preventDefault();
@@ -61,7 +61,8 @@ function Search({ category, setSearchString, searchString, type }) {
           //   .filter((item) => item.instructions && item.sections);
           setSearchString(inputString);
           // dispatch(recipeActions.searchRecipe(data));
-          dispatch(searchRecipe(searchString));
+          // console.log(searchString);
+          dispatch(searchRecipe(inputString));
         } catch (error) {
           console.log(error);
         }

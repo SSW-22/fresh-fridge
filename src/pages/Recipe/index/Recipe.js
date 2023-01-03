@@ -11,7 +11,10 @@ function Recipe() {
 
   const recipes = useAppSelector((state) => state.recipe);
 
-  const filteredSavedArray = useArrayFilter(recipes.savedRecipes, searchString);
+  const filteredSavedArray = useArrayFilter(
+    recipes.savedRecipes.recipes,
+    searchString,
+  );
 
   return (
     <div data-testid="recipe-component" className={classes.container}>
@@ -29,7 +32,9 @@ function Recipe() {
           searchString={searchString}
           category={category}
           recipes={
-            category === "0" ? recipes.searchedRecipes : filteredSavedArray
+            category === "0"
+              ? recipes.searchedRecipes.recipes
+              : filteredSavedArray
           }
         />
       </div>
