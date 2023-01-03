@@ -48,6 +48,12 @@ const inventorySlice = createSlice({
         previousState.items = state.items.filter((item) => item.id !== id);
       }
     },
+    changeCategory(state, action) {
+      const previousState = state;
+      const id = action.payload.selectedId;
+      const selectedItem = previousState.items.find((item) => item.id === id);
+      selectedItem.category = action.payload.category;
+    },
   },
 });
 

@@ -3,13 +3,12 @@ import { AiFillEdit, AiFillDelete } from "react-icons/ai";
 import { FiMove } from "react-icons/fi";
 import AddGroceryItemForm from "../../pages/Grocery/addItemForm/AddGroceryItemForm";
 import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
-// import getNewItemArray from "../../utils/getNewItemArray";
-// import addDocument from "../../firebase/addItemInventory";
 import { inventoryActions } from "../../store/inventorySlice";
 import classes from "./EditMoveDelete.module.css";
 import { groceryActions } from "../../store/grocerySlice";
 import AddItemForm from "../../pages/Inventory/addItemForm/AddItemForm";
 import { firebaseDataUpdate } from "../../utils/firebaseDataUpdate";
+import MoveItem from "../../pages/Inventory/moveItem/MoveItem";
 
 function EditMoveDelete({ type, selectedId, setSelctedId }) {
   const [isEditOpen, setIsEditOpen] = useState(false);
@@ -52,6 +51,13 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
           type={type}
           selectedId={selectedId}
           setSelctedId={setSelctedId}
+        />
+      )}
+      {type === "inventory" && isMoveOpen && (
+        <MoveItem
+          setOpenForm={setIsMoveOpen}
+          selectedId={selectedId}
+          userData={userData}
         />
       )}
       <div className={classes["edm-btn"]}>
