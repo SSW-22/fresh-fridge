@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 import { IoSnow } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { BsFillInboxesFill } from "react-icons/bs";
-import categoryObj from "../../../utils/categoryObj";
+import { inventoryCategoryObj } from "../../../utils/categoryObj";
 import { useAppDispatch } from "../../../hooks/react-redux-hooks";
 import { inventoryActions } from "../../../store/inventorySlice";
-import firebaseDataUpdate from "../../../utils/firebaseDataUpdate";
+import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
 import styles from "./MoveItem.module.css";
 
 function MoveItem({ setOpenForm, selectedId, userData }) {
@@ -55,7 +55,7 @@ function MoveItem({ setOpenForm, selectedId, userData }) {
           {categoryOption[0] === "3" && (
             <BsFillInboxesFill size={20} color="#ffffff" />
           )}
-          {categoryObj[categoryOption[0]]}
+          {inventoryCategoryObj[categoryOption[0]]}
         </button>
         <button
           type="button"
@@ -69,7 +69,7 @@ function MoveItem({ setOpenForm, selectedId, userData }) {
           {categoryOption[1] === "3" && (
             <BsFillInboxesFill size={20} color="#ffffff" />
           )}
-          {categoryObj[categoryOption[1]]}
+          {inventoryCategoryObj[categoryOption[1]]}
         </button>
       </div>
       <button

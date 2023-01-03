@@ -7,7 +7,7 @@ import { inventoryActions } from "../../store/inventorySlice";
 import classes from "./EditMoveDelete.module.css";
 import { groceryActions } from "../../store/grocerySlice";
 import AddItemForm from "../../pages/Inventory/addItemForm/AddItemForm";
-import firebaseDataUpdate from "../../utils/firebaseDataUpdate";
+import { firebaseDataUpdate } from "../../utils/firebaseDataUpdate";
 import MoveItem from "../../pages/Inventory/moveItem/MoveItem";
 
 function EditMoveDelete({ type, selectedId, setSelctedId }) {

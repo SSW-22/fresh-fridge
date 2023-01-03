@@ -1,3 +1,4 @@
+import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { userActions } from "../../store/userSlice";
 import { signOutWithGoogle } from "../../firebase/googleAuth";
@@ -20,7 +21,13 @@ function Logout() {
   };
 
   return (
-    <button type="button" onClick={logOutHandler} className={classes.btn}>
+    <button
+      type="button"
+      onClick={logOutHandler}
+      className={classes.btn}
+      data-testid="logout-test"
+    >
+      <FiLogOut color="#ffffff" size={12} />
       Logout
     </button>
   );

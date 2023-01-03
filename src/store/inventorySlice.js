@@ -4,6 +4,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialInventoryState = {
   userId: "",
   items: [],
+  reminderDays: "",
 };
 
 const inventorySlice = createSlice({
@@ -14,6 +15,7 @@ const inventorySlice = createSlice({
       const previousState = state;
       previousState.userId = action.payload.userId;
       previousState.items = action.payload.items || [];
+      previousState.reminderDays = action.payload.reminderDays;
     },
     addUser(state, action) {
       const previousState = state;
@@ -23,6 +25,10 @@ const inventorySlice = createSlice({
       const previousState = state;
       previousState.userId = "";
       previousState.items = [];
+    },
+    addReminderDays(state, action) {
+      const previousState = state;
+      previousState.reminderDays = action.payload;
     },
     addItem(state, action) {
       const previousState = state;

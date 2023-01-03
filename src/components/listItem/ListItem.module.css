@@ -28,10 +28,6 @@
   font-size: 1.4rem;
 }
 
-#expired {
-  color: #ff0000;
-}
-
 .textbox-right {
   display: flex;
   align-items: center;
@@ -43,4 +39,8 @@
 }
 .icon-selected {
   color: var(--color-green);
+}
+
+.expired {
+  color: #ff0000;
 }

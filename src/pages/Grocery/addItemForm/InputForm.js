@@ -1,14 +1,15 @@
 import { useEffect, useState } from "react";
 import { MdOutlineSaveAlt } from "react-icons/md";
-import { IoAdd, IoRemove } from "react-icons/io5";
+import { IoAdd } from "react-icons/io5";
 import classes from "./InputForm.module.css";
 import { useAppSelector } from "../../../hooks/react-redux-hooks";
+import SetNumber from "../../../components/setNumber/SetNumber";
 
 function InputForm({ onSubmit, selectedId }) {
   const initialItem = useAppSelector((state) =>
     state.grocery.items.find((item) => item.id === selectedId),
   );
-  const [item, setItem] = useState({ name: "", qty: 0 });
+  const [item, setItem] = useState({ name: "", qty: "" });
   //   const [nameValid, setNameValid] = useState(false);
   //   const [numberValid, setNumberValid] = useState(false);
   const [isValid, setIsValid] = useState({
@@ -44,47 +45,47 @@ function InputForm({ onSubmit, selectedId }) {
     });
   };
 
-  const qtyValidHandler = (qty) => {
-    if (qty < 1) {
-      //   setNumberValid(false);
-      setIsValid((prev) => {
-        return { ...prev, qty: false };
-      });
-    } else {
-      //   setNumberValid(true);
-      setIsValid((prev) => {
-        return { ...prev, qty: true };
-      });
-    }
-  };
+  // const qtyValidHandler = (qty) => {
+  //   if (qty < 1) {
+  //     //   setNumberValid(false);
+  //     setIsValid((prev) => {
+  //       return { ...prev, qty: false };
+  //     });
+  //   } else {
+  //     //   setNumberValid(true);
+  //     setIsValid((prev) => {
+  //       return { ...prev, qty: true };
+  //     });
+  //   }
+  // };
 
-  const qtyChangeHandler = (e) => {
-    e.preventDefault();
-    const value = +e.target.value.replace(/\D/g, "");
-    qtyValidHandler(value);
-    setItem((prev) => {
-      return { ...prev, qty: value };
-    });
-  };
+  // const qtyChangeHandler = (e) => {
+  //   e.preventDefault();
+  //   const value = +e.target.value.replace(/\D/g, "");
+  //   qtyValidHandler(value);
+  //   setItem((prev) => {
+  //     return { ...prev, qty: value };
+  //   });
+  // };
 
-  const qtyBtnClickHandler = (e) => {
-    e.preventDefault();
-    if (e.target.id === "increase") {
-      setItem((prev) => {
-        qtyValidHandler(prev.qty + 1);
-        return { ...prev, qty: prev.qty + 1 };
-      });
-      //   setNumberValid(true);
-    }
-    if (e.target.id === "decrease") {
-      if (item.qty > 0) {
-        setItem((prev) => {
-          qtyValidHandler(prev.qty - 1);
-          return { ...prev, qty: prev.qty - 1 };
-        });
-      }
-    }
-  };
+  // const qtyBtnClickHandler = (e) => {
+  //   e.preventDefault();
+  //   if (e.target.id === "increase") {
+  //     setItem((prev) => {
+  //       qtyValidHandler(prev.qty + 1);
+  //       return { ...prev, qty: prev.qty + 1 };
+  //     });
+  //     //   setNumberValid(true);
+  //   }
+  //   if (e.target.id === "decrease") {
+  //     if (item.qty > 0) {
+  //       setItem((prev) => {
+  //         qtyValidHandler(prev.qty - 1);
+  //         return { ...prev, qty: prev.qty - 1 };
+  //       });
+  //     }
+  //   }
+  // };
 
   return (
     <form
@@ -122,13 +123,18 @@ function InputForm({ onSubmit, selectedId }) {
       <div className={classes["add-qty"]}>
         <label htmlFor="qty" className={classes["qty-form"]}>
           Quantity
-          <input
+          {/* <input
             type="text"
             id="qty"
             name="qty"
             onChange={qtyChangeHandler}
             placeholder="Add quantity"
             value={item.qty}
+          /> */}
+          <SetNumber
+            number={item}
+            setNumber={setItem}
+            setIsValid={setIsValid}
           />
           <p
             className={`${
@@ -140,7 +146,7 @@ function InputForm({ onSubmit, selectedId }) {
             Please enter a quantity
           </p>
         </label>
-        <div className={classes["btn-wrapper"]}>
+        {/* <div className={classes["btn-wrapper"]}>
           <button type="button" id="increase" onClick={qtyBtnClickHandler}>
             <IoAdd size={15} color="#ffffff" className={classes["qty-btn"]} />
           </button>
@@ -151,23 +157,18 @@ function InputForm({ onSubmit, selectedId }) {
               className={classes["qty-btn"]}
             />
           </button>
-        </div>
+        </div> */}
       </div>
       {selectedId ? (
         <button
           className={`${classes["submit-btn"]} ${classes["edit-submit"]}`}
           type="submit"
-          //   disabled={!isValid.name || !isValid.qty}
         >
           <MdOutlineSaveAlt color="#ffffff" size={15} />
           Save changes
         </button>
       ) : (
-        <button
-          className={classes["submit-btn"]}
-          type="submit"
-          //   disabled={!isValid.name || !isValid.qty}
-        >
+        <button className={classes["submit-btn"]} type="submit">
           <IoAdd color="#ffffff" size={15} className={classes.btn} />
           Add item
         </button>

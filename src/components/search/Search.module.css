@@ -41,6 +41,13 @@
   outline: none;
 }
 .search-textbox-icon {
+  pointer-events: none;
+}
+.submit-btn {
   position: absolute;
   right: 1.5rem;
+  border: none;
+  background: none;
+  display: flex;
+  align-items: center;
 }

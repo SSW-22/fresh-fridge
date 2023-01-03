@@ -3,10 +3,8 @@ import Logout from "../Profile";
 import renderWithProviders from "../../../utils/test-utils";
 
 describe("test logout btn", () => {
-  it("Profile component logout btn render test", () => {
+  it("logout component render", () => {
     renderWithProviders(<Logout />);
-
-    const btnText = screen.getByText(/Logout/i);
-    expect(btnText).toBeInTheDocument();
+    expect(screen.getByTestId("logout-test")).toBeInTheDocument();
   });
 });

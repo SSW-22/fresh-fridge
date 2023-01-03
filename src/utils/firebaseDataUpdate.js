@@ -6,6 +6,9 @@ const firebaseDataUpdate = async (type, userData, newItem) => {
   const newData = {};
   newData.userId = userData.userId;
   newData.items = getNewItemArray(previousItems, newItem);
+  if (type === "inventory") {
+    newData.reminderDays = userData.reminderDays;
+  }
 
   await addDocument(
     type === "inventory" ? "inventory" : "grocery",
@@ -14,4 +17,13 @@ const firebaseDataUpdate = async (type, userData, newItem) => {
   );
 };
 
-export default firebaseDataUpdate;
+const firebaseReminderDateUpdate = async (userData, newReminderDays) => {
+  const newData = {};
+  newData.userId = userData.userId;
+  newData.items = userData.items;
+  newData.reminderDays = newReminderDays;
+
+  await addDocument("inventory", newData, newData.userId);
+};
+
+export { firebaseDataUpdate, firebaseReminderDateUpdate };
