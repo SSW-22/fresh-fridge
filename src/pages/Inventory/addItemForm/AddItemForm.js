@@ -31,9 +31,20 @@ function AddItemForm({
   const [itemQty, setItemQty] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
 
+  const initialInventoryItem = useAppSelector((state) => state.inventory.items.find((item) => item.id === selectedId));
+
   const initialGroceryItem = useAppSelector((state) =>
     state.grocery.items.find((item) => item.id === selectedId),
   );
+
+  useEffect(() => {
+    if (initialInventoryItem) {
+      nameRef.current.value = initialInventoryItem.name;
+      expireDateRef.current.value = initialInventoryItem.expireDate;
+      setSelectedOption(initialInventoryItem.category);
+      setItemQty(initialInventoryItem.qty);
+    }
+  }, [initialInventoryItem]);
 
   useEffect(() => {
     if (initialGroceryItem) {
@@ -100,6 +111,7 @@ function AddItemForm({
       firebaseDataUpdate("grocery", groceryUserData, newItem);
       setSelctedId("");
     }
+
     setOpenForm(false);
   };
 

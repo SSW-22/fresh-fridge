@@ -38,6 +38,12 @@ const inventorySlice = createSlice({
       );
       if (!existItem) {
         previousState.items.push(newItem);
+      } else {
+        existItem.id = newItem.id;
+        existItem.qty = newItem.qty;
+        existItem.name = newItem.name;
+        existItem.category = newItem.category;
+        existItem.expireDate = newItem.expireDate;
       }
     },
     deleteItem(state, action) {
