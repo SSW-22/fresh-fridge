@@ -7,6 +7,7 @@ import { userActions } from "../../store/userSlice";
 import { inventoryActions } from "../../store/inventorySlice";
 import { groceryActions } from "../../store/grocerySlice";
 import SignIn from "./SignIn";
+import Loading from "../../components/loading/Loading";
 import classes from "./Home.module.css";
 
 function Home() {
@@ -28,7 +29,11 @@ function Home() {
   }, [dispatch]);
 
   if (isLoading) {
-    return <div>Loading</div>;
+    return (
+      <div className={classes.container}>
+        <Loading />
+      </div>
+    );
   }
 
   return (

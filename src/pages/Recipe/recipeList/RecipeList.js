@@ -9,7 +9,9 @@ function RecipeList({ searchString, category, recipes }) {
   return (
     <div data-testid="recipe-list-test" className={classes["recipe-list"]}>
       {status === "loading" ? (
-        <Loading />
+        <div className={classes["no-item"]}>
+          <Loading />
+        </div>
       ) : (
         <div>
           <div>
