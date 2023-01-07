@@ -13,6 +13,7 @@
   height: 100%;
   /* gap: 4rem; */
   align-items: center;
+  width: 100%;
 }
 
 .profile-header {
@@ -20,6 +21,8 @@
   position: fixed;
   padding: 5.5rem 3.5rem 3rem 3.5rem;
   background-color: #ffffff;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .profile-main {
   margin-top: 12.5rem;

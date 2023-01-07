@@ -36,6 +36,8 @@ main {
 
 .App {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 h1,
