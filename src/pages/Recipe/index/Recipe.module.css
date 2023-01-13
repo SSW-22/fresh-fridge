@@ -23,3 +23,15 @@
   justify-content: center;
   margin-top: 12.5rem;
 }
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 450px;
+    height: 750px;
+    overflow: auto;
+    box-shadow: 0 1.2rem 3.2rem;
+  }
+  .recipe-header {
+    width: 450px;
+  }
+}

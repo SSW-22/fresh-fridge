@@ -108,3 +108,15 @@ footer li {
   border: solid 1.5px var(--color-green);
   line-height: normal;
 }
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 450px;
+    height: 750px;
+    overflow: auto;
+    box-shadow: 0 1.2rem 3.2rem;
+  }
+  .profile-header {
+    width: 450px;
+  }
+}

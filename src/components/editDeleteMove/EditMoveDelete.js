@@ -55,12 +55,14 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
         />
       )}
       {type === "grocery" && isMoveOpen && (
-        <AddItemForm
-          setOpenForm={setIsMoveOpen}
-          type={type}
-          selectedId={selectedId}
-          setSelctedId={setSelctedId}
-        />
+        <div className={classes["add-form-container"]}>
+          <AddItemForm
+            setOpenForm={setIsMoveOpen}
+            type={type}
+            selectedId={selectedId}
+            setSelctedId={setSelctedId}
+          />
+        </div>
       )}
       {type === "inventory" && isMoveOpen && (
         <MoveItem

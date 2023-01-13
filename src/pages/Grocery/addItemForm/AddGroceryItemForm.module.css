@@ -33,6 +33,20 @@
   border: none;
   background-color: #ffffff;
 }
+.close-btn {
+  cursor: pointer;
+}
+
+@media only screen and (min-width: 1200px) {
+  .add-form-bg {
+    right: unset;
+    top: unset;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, 360px);
+    width: 450px;
+  }
+}
 
 /* .add-form {
   display: flex;
