@@ -50,6 +50,7 @@
   align-self: center;
   border: solid 1.5px var(--color-green);
   line-height: normal;
+  cursor: pointer;
 }
 .summit-btn:disabled {
   background-color: #bfbfbf;

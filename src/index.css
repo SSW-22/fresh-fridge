@@ -36,6 +36,8 @@ main {
 
 .App {
   height: 100%;
+  display: flex;
+  justify-content: center;
 }
 
 h1,
@@ -43,4 +45,9 @@ h2,
 h3 {
   margin: 0;
   padding: 0;
+}
+@media only screen and (min-width: 1200px) {
+  .App {
+    align-items: center;
+  }
 }

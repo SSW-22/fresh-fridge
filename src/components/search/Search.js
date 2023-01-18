@@ -12,6 +12,7 @@ import classes from "./Search.module.css";
 function Search({ category, setSearchString, searchString, type }) {
   const dispatch = useAppDispatch();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [animation, setAnimation] = useState(false);
   const [inputString, setInputString] = useState("");
 
   const status = useAppSelector((state) => state.recipe.searchedRecipes.status);
@@ -23,7 +24,11 @@ function Search({ category, setSearchString, searchString, type }) {
 
   const onCloseHandler = (e) => {
     e.preventDefault();
-    setIsSearchOpen(false);
+    setAnimation(true);
+    setTimeout(() => {
+      setAnimation(false);
+      setIsSearchOpen(false);
+    }, 300);
     setInputString("");
     setSearchString("");
   };
@@ -73,7 +78,9 @@ function Search({ category, setSearchString, searchString, type }) {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className={isSearchOpen ? `${classes.search}` : ""}
+      className={`${classes.container} ${
+        isSearchOpen ? `${classes.search}` : ""
+      } ${animation ? `${classes.close}` : ""}`}
     >
       {!isSearchOpen && (
         <button

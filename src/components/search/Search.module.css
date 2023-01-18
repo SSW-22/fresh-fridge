@@ -1,10 +1,21 @@
+.container {
+  width: 5rem;
+}
+
 .search {
   width: 100%;
   position: absolute;
   height: 4rem;
   background-color: var(--color-green);
   border-radius: 2rem;
+  right: 0;
+  transition: width 0.5s;
 }
+
+.close {
+  width: 5rem;
+}
+
 .search-btn {
   background-color: var(--color-green);
   border: none;
@@ -14,6 +25,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 2rem;
+  cursor: pointer;
 }
 .search-textbox {
   display: flex;
@@ -26,6 +38,7 @@
   border: none;
   margin-left: 0.5rem;
   margin-right: 0.7rem;
+  cursor: pointer;
 }
 .search-textbox input {
   width: 100%;

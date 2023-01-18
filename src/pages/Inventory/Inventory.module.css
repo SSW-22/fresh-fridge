@@ -7,12 +7,15 @@
   padding-bottom: 1rem;
   /* height: calc(100% - 5rem); */
   height: 100%;
+  width: 100%;
 }
 .inventory-header {
   width: 100%;
   position: fixed;
   padding: 5.5rem 3.5rem 3rem 3.5rem;
   background-color: #ffffff;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .inventory-list {
   width: 100%;
@@ -31,4 +34,19 @@
 .btn-box {
   position: fixed;
   bottom: 8rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 450px;
+    height: 750px;
+    overflow: auto;
+    box-shadow: 0 1.2rem 3.2rem;
+  }
+  .inventory-header {
+    width: 450px;
+  }
+  .inventory-list {
+    height: auto;
+  }
 }

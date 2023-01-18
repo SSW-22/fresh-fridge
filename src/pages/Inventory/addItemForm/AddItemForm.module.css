@@ -111,6 +111,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .input-qty {
   width: 9rem;
@@ -168,6 +169,7 @@
   margin-bottom: 0.2rem;
   position: absolute;
   bottom: 2.1rem;
+  cursor: pointer;
 }
 .move-submit {
   width: 11rem;
@@ -175,8 +177,23 @@
 .btn {
   transform: translateY(1px);
 }
+.close-btn {
+  cursor: pointer;
+}
 
 .date-input {
   -webkit-appearance: none;
   width: 20rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  .add-form-bg {
+    right: unset;
+    top: unset;
+    left: 50%;
+    bottom: 50%;
+    transform: translate(-50%, 360px);
+    width: 450px;
+    height: 670px;
+  }
 }

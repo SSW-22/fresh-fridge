@@ -10,8 +10,7 @@ function InputForm({ onSubmit, selectedId }) {
     state.grocery.items.find((item) => item.id === selectedId),
   );
   const [item, setItem] = useState({ name: "", qty: "" });
-  //   const [nameValid, setNameValid] = useState(false);
-  //   const [numberValid, setNumberValid] = useState(false);
+
   const [isValid, setIsValid] = useState({
     initial: true,
     name: false,
@@ -44,48 +43,6 @@ function InputForm({ onSubmit, selectedId }) {
       return { ...prev, name: e.target.value };
     });
   };
-
-  // const qtyValidHandler = (qty) => {
-  //   if (qty < 1) {
-  //     //   setNumberValid(false);
-  //     setIsValid((prev) => {
-  //       return { ...prev, qty: false };
-  //     });
-  //   } else {
-  //     //   setNumberValid(true);
-  //     setIsValid((prev) => {
-  //       return { ...prev, qty: true };
-  //     });
-  //   }
-  // };
-
-  // const qtyChangeHandler = (e) => {
-  //   e.preventDefault();
-  //   const value = +e.target.value.replace(/\D/g, "");
-  //   qtyValidHandler(value);
-  //   setItem((prev) => {
-  //     return { ...prev, qty: value };
-  //   });
-  // };
-
-  // const qtyBtnClickHandler = (e) => {
-  //   e.preventDefault();
-  //   if (e.target.id === "increase") {
-  //     setItem((prev) => {
-  //       qtyValidHandler(prev.qty + 1);
-  //       return { ...prev, qty: prev.qty + 1 };
-  //     });
-  //     //   setNumberValid(true);
-  //   }
-  //   if (e.target.id === "decrease") {
-  //     if (item.qty > 0) {
-  //       setItem((prev) => {
-  //         qtyValidHandler(prev.qty - 1);
-  //         return { ...prev, qty: prev.qty - 1 };
-  //       });
-  //     }
-  //   }
-  // };
 
   return (
     <form
@@ -146,18 +103,6 @@ function InputForm({ onSubmit, selectedId }) {
             Please enter a quantity
           </p>
         </label>
-        {/* <div className={classes["btn-wrapper"]}>
-          <button type="button" id="increase" onClick={qtyBtnClickHandler}>
-            <IoAdd size={15} color="#ffffff" className={classes["qty-btn"]} />
-          </button>
-          <button type="button" id="decrease" onClick={qtyBtnClickHandler}>
-            <IoRemove
-              size={15}
-              color="#ffffff"
-              className={classes["qty-btn"]}
-            />
-          </button>
-        </div> */}
       </div>
       {selectedId ? (
         <button

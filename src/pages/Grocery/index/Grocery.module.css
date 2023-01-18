@@ -6,6 +6,7 @@
   padding: 0 3.5rem 0 3.5rem;
   padding-bottom: 1rem;
   height: 100%;
+  width: 100%;
 }
 /* .between {
   justify-content: space-between;
@@ -15,10 +16,27 @@
   position: fixed;
   padding: 5.5rem 3.5rem 3rem 3.5rem;
   background-color: #ffffff;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .grocery-list {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 12.5rem;
+}
+
+@media only screen and (min-width: 1200px) {
+  .container {
+    width: 450px;
+    height: 750px;
+    overflow: auto;
+    box-shadow: 0 1.2rem 3.2rem;
+  }
+  .grocery-header {
+    width: 450px;
+  }
+  .grocery-list {
+    height: 100%;
+  }
 }
