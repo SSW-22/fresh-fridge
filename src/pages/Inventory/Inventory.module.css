@@ -47,6 +47,6 @@
     width: 450px;
   }
   .inventory-list {
-    height: 100%;
+    height: auto;
   }
 }

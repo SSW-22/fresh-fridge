@@ -1,31 +1,36 @@
 .container {
-  position: relative;
   width: 100%;
   background: #ffffff;
   border: solid 1.5px var(--color-green);
   border-radius: 2rem;
-  padding: 0.7rem 1.4rem 0.7rem 1.4rem;
+  padding: 1.5rem 1.8rem 1.5rem 1.8rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 1.3rem;
-  padding: 3rem;
+  gap: 1.5rem;
+  align-items: center;
 }
-
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.header {
+  font-size: 1.6rem;
+  font-weight: 400;
+}
 .exit-btn {
-  position: absolute;
-  right: 15px;
-  top: 5px;
   border-style: none;
   background-color: transparent;
   cursor: pointer;
 }
+.exit-btn-icon {
+  pointer-events: none;
+}
 
 .btn-container {
   display: flex;
-  justify-content: space-around;
-  width: 50%;
-  align-self: center;
-  margin-top: 2rem;
+  gap: 1.5rem;
 }
 
 .btn {
@@ -37,6 +42,7 @@
   align-items: center;
   border: solid 1.5px var(--color-green);
   font-size: 1.2rem;
+  font-weight: 300;
   gap: 0.5rem;
   height: 3rem;
   border-radius: 1.5rem;

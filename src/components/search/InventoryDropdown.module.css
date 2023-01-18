@@ -44,6 +44,7 @@
   display: flex;
   padding: 0rem 1.2rem 0rem 1.2rem;
   gap: 1rem;
+  cursor: pointer;
 }
 #all-food {
   border-bottom: solid 1px var(--color-green);
@@ -51,6 +52,7 @@
 }
 .dropdown-btn {
   padding-right: 1.5rem;
+  cursor: pointer;
 }
 .display-none {
   display: none;

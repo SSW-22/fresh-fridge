@@ -111,6 +111,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 }
 .input-qty {
   width: 9rem;
@@ -168,12 +169,16 @@
   margin-bottom: 0.2rem;
   position: absolute;
   bottom: 2.1rem;
+  cursor: pointer;
 }
 .move-submit {
   width: 11rem;
 }
 .btn {
   transform: translateY(1px);
+}
+.close-btn {
+  cursor: pointer;
 }
 
 .date-input {

@@ -40,6 +40,7 @@
   color: #bfbfbf;
   border: none;
   background: none;
+  cursor: pointer;
 }
 
 .icon-selected {

@@ -31,7 +31,9 @@ function AddItemForm({
   const [itemQty, setItemQty] = useState(0);
   const [selectedOption, setSelectedOption] = useState(null);
 
-  const initialInventoryItem = useAppSelector((state) => state.inventory.items.find((item) => item.id === selectedId));
+  const initialInventoryItem = useAppSelector((state) =>
+    state.inventory.items.find((item) => item.id === selectedId),
+  );
 
   const initialGroceryItem = useAppSelector((state) =>
     state.grocery.items.find((item) => item.id === selectedId),
@@ -151,12 +153,14 @@ function AddItemForm({
   };
   return (
     <div
-      className={`${classes["add-form-bg"]} ${type === "grocery" ? classes["form-bg-grocery"] : ""
-        }`}
+      className={`${classes["add-form-bg"]} ${
+        selectedId ? classes["form-bg-grocery"] : ""
+      }`}
     >
       <div
-        className={`${classes["modal-container"]} ${type === "grocery" ? classes["modal-container-grocery"] : ""
-          }`}
+        className={`${classes["modal-container"]} ${
+          selectedId ? classes["modal-container-grocery"] : ""
+        }`}
       >
         <div className={classes["title-box"]}>
           {type === "grocery" ? <h1>Move Item</h1> : <h1>Add Item</h1>}
@@ -193,10 +197,11 @@ function AddItemForm({
                 }}
               />
               <p
-                className={`${validation.itemName
-                  ? classes["err-msg-active"]
-                  : classes["err-msg"]
-                  }`}
+                className={`${
+                  validation.itemName
+                    ? classes["err-msg-active"]
+                    : classes["err-msg"]
+                }`}
               >
                 Please enter a name
               </p>
@@ -231,10 +236,11 @@ function AddItemForm({
                   </div>
                 </div>
                 <p
-                  className={`${validation.qty
-                    ? classes["err-msg-active"]
-                    : classes["err-msg"]
-                    }`}
+                  className={`${
+                    validation.qty
+                      ? classes["err-msg-active"]
+                      : classes["err-msg"]
+                  }`}
                 >
                   Please enter a quantity
                 </p>
@@ -301,10 +307,11 @@ function AddItemForm({
                 </label>
               </div>
               <p
-                className={`${validation.addTo
-                  ? classes["err-msg-active"]
-                  : classes["err-msg"]
-                  }`}
+                className={`${
+                  validation.addTo
+                    ? classes["err-msg-active"]
+                    : classes["err-msg"]
+                }`}
               >
                 Please select a location
               </p>
@@ -324,6 +331,7 @@ function AddItemForm({
               />
             </label>
           </div>
+
           {type === "grocery" ? (
             <button
               type="button"

@@ -107,6 +107,7 @@ footer li {
   border-radius: 1.5rem;
   border: solid 1.5px var(--color-green);
   line-height: normal;
+  cursor: pointer;
 }
 
 @media only screen and (min-width: 1200px) {

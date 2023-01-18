@@ -25,6 +25,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 2rem;
+  cursor: pointer;
 }
 .search-textbox {
   display: flex;
@@ -37,6 +38,7 @@
   border: none;
   margin-left: 0.5rem;
   margin-right: 0.7rem;
+  cursor: pointer;
 }
 .search-textbox input {
   width: 100%;

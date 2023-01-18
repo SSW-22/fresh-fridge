@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { IoSnow } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { BsFillInboxesFill } from "react-icons/bs";
+import { MdOutlineClose } from "react-icons/md";
 import { inventoryCategoryObj } from "../../../utils/categoryObj";
 import { useAppDispatch } from "../../../hooks/react-redux-hooks";
 import { inventoryActions } from "../../../store/inventorySlice";
 import { firebaseDataUpdate } from "../../../utils/firebaseDataUpdate";
-import styles from "./MoveItem.module.css";
+import classes from "./MoveItem.module.css";
 
 function MoveItem({ setOpenForm, selectedId, userData }) {
   const [categoryOption, setCategoryOption] = useState(["1", "2", "3"]);
@@ -40,45 +41,47 @@ function MoveItem({ setOpenForm, selectedId, userData }) {
     setOpenForm(false);
   };
   return (
-    <div className={styles.container}>
-      <h2>Move item to</h2>
-      <div className={styles["btn-container"]}>
+    <div className={classes.container}>
+      <div className={classes["header-container"]}>
+        <h3 className={classes.header}>Move item to</h3>
+        <button
+          type="button"
+          className={classes["exit-btn"]}
+          onClick={closeHandler}
+        >
+          <MdOutlineClose className={classes["exit-btn-icon"]} size={17} />
+        </button>
+      </div>
+      <div className={classes["btn-container"]}>
         <button
           type="button"
           onClick={() => categoryHandler(categoryOption[0])}
-          className={styles.btn}
+          className={classes.btn}
         >
           {categoryOption[0] === "1" && (
-            <RiFridgeFill size={20} color="#ffffff" />
+            <RiFridgeFill size={14} color="#ffffff" />
           )}
-          {categoryOption[0] === "2" && <IoSnow size={20} color="#ffffff" />}
+          {categoryOption[0] === "2" && <IoSnow size={14} color="#ffffff" />}
           {categoryOption[0] === "3" && (
-            <BsFillInboxesFill size={20} color="#ffffff" />
+            <BsFillInboxesFill size={14} color="#ffffff" />
           )}
           {inventoryCategoryObj[categoryOption[0]]}
         </button>
         <button
           type="button"
           onClick={() => categoryHandler(categoryOption[1])}
-          className={styles.btn}
+          className={classes.btn}
         >
           {categoryOption[1] === "1" && (
-            <RiFridgeFill size={20} color="#ffffff" />
+            <RiFridgeFill size={14} color="#ffffff" />
           )}
-          {categoryOption[1] === "2" && <IoSnow size={20} color="#ffffff" />}
+          {categoryOption[1] === "2" && <IoSnow size={14} color="#ffffff" />}
           {categoryOption[1] === "3" && (
-            <BsFillInboxesFill size={20} color="#ffffff" />
+            <BsFillInboxesFill size={14} color="#ffffff" />
           )}
           {inventoryCategoryObj[categoryOption[1]]}
         </button>
       </div>
-      <button
-        type="button"
-        className={styles["exit-btn"]}
-        onClick={closeHandler}
-      >
-        X
-      </button>
     </div>
   );
 }
