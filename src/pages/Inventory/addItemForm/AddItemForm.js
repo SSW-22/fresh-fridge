@@ -63,7 +63,7 @@ function AddItemForm({
     addTo: true,
   });
 
-  // closing form
+  // closing form.
   const closeFormHandeler = () => {
     setOpenForm(false);
   };
