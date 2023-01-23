@@ -6,6 +6,7 @@ import { FiMove } from "react-icons/fi";
 import { IoAdd, IoSnow } from "react-icons/io5";
 import { RiFridgeFill } from "react-icons/ri";
 import { BsFillInboxesFill } from "react-icons/bs";
+import SetNumber from "../../../components/setNumber/SetNumber";
 // import addDocument from "../../../firebase/addItemInventory";
 import { inventoryActions } from "../../../store/inventorySlice";
 import { groceryActions } from "../../../store/grocerySlice";
@@ -22,13 +23,14 @@ function AddItemForm({
   type,
   selectedId = null,
   setSelctedId = null,
+  isEditOpen,
 }) {
   const dispatch = useAppDispatch();
   const userData = useAppSelector((state) => state.inventory);
   const groceryUserData = useAppSelector((state) => state.grocery);
   const nameRef = useRef();
   const expireDateRef = useRef();
-  const [itemQty, setItemQty] = useState(0);
+  const [itemQty, setItemQty] = useState({ qty: "" });
   const [selectedOption, setSelectedOption] = useState(null);
 
   const initialInventoryItem = useAppSelector((state) =>
@@ -56,9 +58,9 @@ function AddItemForm({
   }, [initialGroceryItem]);
 
   const [validation, setValidation] = useState({
-    itemName: null,
-    qty: null,
-    addTo: null,
+    itemName: true,
+    qty: true,
+    addTo: true,
   });
 
   // closing form
@@ -67,19 +69,20 @@ function AddItemForm({
   };
   // checking all validation for submit form
   const checkValidation = () => {
+    const currentItemQty = +itemQty.qty || 0
     if (nameRef.current.value === "") {
       setValidation((prev) => {
-        return { ...prev, itemName: true };
+        return { ...prev, itemName: false };
       });
     }
-    if (itemQty <= 0) {
+    if (currentItemQty <= 0) {
       setValidation((prev) => {
-        return { ...prev, qty: true };
+        return { ...prev, qty: false };
       });
     }
     if (selectedOption === null) {
       setValidation((prev) => {
-        return { ...prev, addTo: true };
+        return { ...prev, addTo: false };
       });
     }
   };
@@ -88,7 +91,7 @@ function AddItemForm({
     e.preventDefault();
     if (
       nameRef.current.value === "" ||
-      itemQty <= 0 ||
+      itemQty.qty <= 0 ||
       selectedOption === null
     ) {
       checkValidation();
@@ -99,7 +102,7 @@ function AddItemForm({
       name: nameRef.current.value,
       expireDate: expireDateRef.current.value,
       category: selectedOption,
-      qty: itemQty,
+      qty: itemQty.qty,
     };
     dispatch(inventoryActions.addItem(newItem));
     // update manually
@@ -119,48 +122,22 @@ function AddItemForm({
 
   // addTo handler
   const radioHandler = (e) => {
-    if (validation.addTo) {
+    if (!validation.addTo) {
       setValidation((prev) => {
-        return { ...prev, addTo: false };
+        return { ...prev, addTo: true };
       });
     }
     setSelectedOption(e.target.value);
   };
-  // qty handler by directly input
-  const qtyHandler = (e) => {
-    if (validation.qty) {
-      setValidation((prev) => {
-        return { ...prev, qty: false };
-      });
-    }
-    const converToNum = Number(e.target.value.replace(/\D/g, ""));
-    setItemQty(converToNum);
-  };
-  // qty handler by increase or decrease btns
-  const qtyBtnHandler = (type) => {
-    if (validation.qty) {
-      setValidation((prev) => {
-        return { ...prev, qty: false };
-      });
-    }
-    if (type === "increase") {
-      setItemQty((prev) => prev + 1);
-    }
-    if (type === "decrease") {
-      if (itemQty === 0) return;
-      setItemQty((prev) => prev - 1);
-    }
-  };
+
   return (
     <div
-      className={`${classes["add-form-bg"]} ${
-        selectedId ? classes["form-bg-grocery"] : ""
-      }`}
+      className={`${classes["add-form-bg"]} ${selectedId ? classes["form-bg-grocery"] : ""
+        }`}
     >
       <div
-        className={`${classes["modal-container"]} ${
-          selectedId ? classes["modal-container-grocery"] : ""
-        }`}
+        className={`${classes["modal-container"]} ${selectedId ? classes["modal-container-grocery"] : ""
+          }`}
       >
         <div className={classes["title-box"]}>
           {type === "grocery" ? <h1>Move Item</h1> : <h1>Add Item</h1>}
@@ -191,61 +168,36 @@ function AddItemForm({
                 onChange={() => {
                   if (nameRef.current.value.length > 0) {
                     setValidation((prev) => {
-                      return { ...prev, itemName: false };
+                      return { ...prev, itemName: true };
                     });
                   }
                 }}
               />
               <p
-                className={`${
-                  validation.itemName
-                    ? classes["err-msg-active"]
-                    : classes["err-msg"]
-                }`}
+                className={`${validation.itemName
+                  ? classes["err-msg"]
+                  : classes["err-msg-active"]
+                  }`}
               >
                 Please enter a name
               </p>
             </label>
           </div>
-          <div>
-            <label htmlFor="quantity" className={classes["input-container"]}>
-              Quantity
-              <div className={classes["input-qty-divider"]}>
-                <div className={classes["input-qty-box"]}>
-                  <input
-                    type="text"
-                    id="quantity"
-                    value={itemQty}
-                    onChange={qtyHandler}
-                    className={classes["input-qty"]}
-                    placeholder="Add quantity"
-                  />
-                  <div className={classes["btn-container"]}>
-                    <button
-                      type="button"
-                      onClick={() => qtyBtnHandler("increase")}
-                    >
-                      +
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => qtyBtnHandler("decrease")}
-                    >
-                      -
-                    </button>
-                  </div>
-                </div>
-                <p
-                  className={`${
-                    validation.qty
-                      ? classes["err-msg-active"]
-                      : classes["err-msg"]
-                  }`}
-                >
-                  Please enter a quantity
-                </p>
-              </div>
-            </label>
+          <div className={classes["input-container"]}>
+            <SetNumber
+              number={itemQty}
+              setNumber={setItemQty}
+              setIsValid={setValidation}
+              validation={validation}
+            />
+            <p
+              className={`${validation.qty
+                ? classes["err-msg"]
+                : classes["err-msg-active"]
+                }`}
+            >
+              Please enter a quantity
+            </p>
           </div>
           <div>
             <label htmlFor="addTo" className={classes["input-container"]}>
@@ -307,11 +259,10 @@ function AddItemForm({
                 </label>
               </div>
               <p
-                className={`${
-                  validation.addTo
-                    ? classes["err-msg-active"]
-                    : classes["err-msg"]
-                }`}
+                className={`${validation.addTo
+                  ? classes["err-msg"]
+                  : classes["err-msg-active"]
+                  }`}
               >
                 Please select a location
               </p>
@@ -348,7 +299,7 @@ function AddItemForm({
               className={classes["submit-btn"]}
             >
               <IoAdd color="#ffffff" size={15} className={classes.btn} />
-              Add item
+              {isEditOpen ? "Edit" : "Add item"}
             </button>
           )}
         </form>

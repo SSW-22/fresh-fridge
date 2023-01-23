@@ -86,12 +86,6 @@
   display: flex;
   align-items: center;
 }
-.input-qty-divider {
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  align-items: flex-start;
-}
 
 .input-container .btn-container {
   display: flex;
