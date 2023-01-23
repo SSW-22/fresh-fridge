@@ -68,25 +68,33 @@ function InputForm({ onSubmit, selectedId }) {
             onChange={nameChangeHandler}
           />
           <p
-            className={`${isValid.name || isValid.initial
-              ? classes["err-msg"]
-              : classes["err-msg-active"]
-              }`}
+            className={`${
+              isValid.name || isValid.initial
+                ? classes["err-msg"]
+                : classes["err-msg-active"]
+            }`}
           >
             Please enter a name
           </p>
         </label>
       </div>
       <div className={classes["add-qty"]}>
-        <SetNumber number={item} setNumber={setItem} setIsValid={setIsValid} />
-        <p
-          className={`${isValid.qty || isValid.initial
-            ? classes["err-msg"]
-            : classes["err-msg-active"]
+        <div htmlFor="qty" className={classes["qty-form"]}>
+          <SetNumber
+            number={item}
+            setNumber={setItem}
+            setIsValid={setIsValid}
+          />
+          <p
+            className={`${
+              isValid.qty || isValid.initial
+                ? classes["err-msg"]
+                : classes["err-msg-active"]
             }`}
-        >
-          Please enter a quantity
-        </p>
+          >
+            Please enter a quantity
+          </p>
+        </div>
       </div>
       {selectedId ? (
         <button
