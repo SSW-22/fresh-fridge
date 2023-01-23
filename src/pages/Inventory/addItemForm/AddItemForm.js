@@ -46,7 +46,7 @@ function AddItemForm({
       nameRef.current.value = initialInventoryItem.name;
       expireDateRef.current.value = initialInventoryItem.expireDate;
       setSelectedOption(initialInventoryItem.category);
-      setItemQty(initialInventoryItem.qty);
+      setItemQty({ qty: initialInventoryItem.qty });
     }
   }, [initialInventoryItem]);
 
