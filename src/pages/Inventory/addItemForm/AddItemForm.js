@@ -53,7 +53,7 @@ function AddItemForm({
   useEffect(() => {
     if (initialGroceryItem) {
       nameRef.current.value = initialGroceryItem.name;
-      setItemQty(initialGroceryItem.qty);
+      setItemQty({ qty: initialGroceryItem.qty });
     }
   }, [initialGroceryItem]);
 
