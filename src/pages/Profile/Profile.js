@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useState } from "react";
 import { BsFillPersonFill } from "react-icons/bs";
 import { MdOutlineSaveAlt } from "react-icons/md";
@@ -60,7 +61,6 @@ function Profile() {
             onSubmit={submitHandler}
             className={classes["submit-handler-box"]}
           >
-            <p>Days</p>
             <SetNumber
               number={number}
               setNumber={setNumber}
@@ -68,9 +68,8 @@ function Profile() {
               type="profile"
             />
             <p
-              className={`${
-                isValid.qty ? classes["err-msg"] : classes["err-msg-active"]
-              }`}
+              className={`${isValid.qty ? classes["err-msg"] : classes["err-msg-active"]
+                }`}
             >
               Please enter a quantity
             </p>

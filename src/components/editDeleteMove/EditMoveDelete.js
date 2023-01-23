@@ -53,6 +53,7 @@ function EditMoveDelete({ type, selectedId, setSelctedId }) {
             type={type}
             selectedId={selectedId}
             setSelctedId={setSelctedId}
+            isEditOpen={isEditOpen}
           />
         </div>
       )}

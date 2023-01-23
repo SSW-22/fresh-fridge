@@ -37,3 +37,10 @@
 .qty-btn {
   pointer-events: none;
 }
+
+.input-qty-divider {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}

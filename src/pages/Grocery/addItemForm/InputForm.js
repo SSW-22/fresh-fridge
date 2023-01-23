@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useEffect, useState } from "react";
 import { MdOutlineSaveAlt } from "react-icons/md";
 import { IoAdd } from "react-icons/io5";
@@ -67,42 +68,25 @@ function InputForm({ onSubmit, selectedId }) {
             onChange={nameChangeHandler}
           />
           <p
-            className={`${
-              isValid.name || isValid.initial
-                ? classes["err-msg"]
-                : classes["err-msg-active"]
-            }`}
+            className={`${isValid.name || isValid.initial
+              ? classes["err-msg"]
+              : classes["err-msg-active"]
+              }`}
           >
             Please enter a name
           </p>
         </label>
       </div>
       <div className={classes["add-qty"]}>
-        <label htmlFor="qty" className={classes["qty-form"]}>
-          Quantity
-          {/* <input
-            type="text"
-            id="qty"
-            name="qty"
-            onChange={qtyChangeHandler}
-            placeholder="Add quantity"
-            value={item.qty}
-          /> */}
-          <SetNumber
-            number={item}
-            setNumber={setItem}
-            setIsValid={setIsValid}
-          />
-          <p
-            className={`${
-              isValid.qty || isValid.initial
-                ? classes["err-msg"]
-                : classes["err-msg-active"]
+        <SetNumber number={item} setNumber={setItem} setIsValid={setIsValid} />
+        <p
+          className={`${isValid.qty || isValid.initial
+            ? classes["err-msg"]
+            : classes["err-msg-active"]
             }`}
-          >
-            Please enter a quantity
-          </p>
-        </label>
+        >
+          Please enter a quantity
+        </p>
       </div>
       {selectedId ? (
         <button

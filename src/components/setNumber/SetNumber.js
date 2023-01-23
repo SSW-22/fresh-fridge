@@ -16,6 +16,7 @@ function SetNumber({ number, setNumber, setIsValid, type }) {
       });
     }
   };
+  // console.log(validation);
 
   const qtyChangeHandler = (e) => {
     e.preventDefault();
@@ -49,39 +50,46 @@ function SetNumber({ number, setNumber, setIsValid, type }) {
   return (
     <div className={classes.container}>
       <label htmlFor="qty" className={classes.qty}>
-        <input
-          name="qty"
-          id="qty"
-          type="text"
-          placeholder={placeholder}
-          value={number.qty}
-          onChange={qtyChangeHandler}
-          data-testid="number-input-test"
-          className={
-            placeholder.length < 15
-              ? `${classes["qty-small-input"]}`
-              : `${classes["qty-large-input"]}`
-          }
-        />
+        {type === "profile" ? "Days" : "Quantity"}
+        <div className={classes["input-qty-divider"]}>
+          <input
+            name="qty"
+            id="qty"
+            type="text"
+            placeholder={placeholder}
+            value={number.qty}
+            onChange={qtyChangeHandler}
+            data-testid="number-input-test"
+            className={
+              placeholder.length < 15
+                ? `${classes["qty-small-input"]}`
+                : `${classes["qty-large-input"]}`
+            }
+          />
+          <div className={classes["btn-wrapper"]}>
+            <button
+              type="button"
+              id="increase"
+              onClick={qtyBtnClickHandler}
+              data-testid="increase-btn"
+            >
+              <IoAdd size={15} color="#ffffff" className={classes["qty-btn"]} />
+            </button>
+            <button
+              type="button"
+              id="decrease"
+              onClick={qtyBtnClickHandler}
+              data-testid="decrease-btn"
+            >
+              <IoRemove
+                size={15}
+                color="#ffffff"
+                className={classes["qty-btn"]}
+              />
+            </button>
+          </div>
+        </div>
       </label>
-      <div className={classes["btn-wrapper"]}>
-        <button
-          type="button"
-          id="increase"
-          onClick={qtyBtnClickHandler}
-          data-testid="increase-btn"
-        >
-          <IoAdd size={15} color="#ffffff" className={classes["qty-btn"]} />
-        </button>
-        <button
-          type="button"
-          id="decrease"
-          onClick={qtyBtnClickHandler}
-          data-testid="decrease-btn"
-        >
-          <IoRemove size={15} color="#ffffff" className={classes["qty-btn"]} />
-        </button>
-      </div>
     </div>
   );
 }
