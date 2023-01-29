@@ -14,7 +14,7 @@
 }
 .modal-container {
   width: 100%;
-  height: calc(100% - 11rem);
+  height: calc(100% - 12rem);
   border: solid 1.5px var(--color-green);
   border-radius: 2rem;
   padding: 2rem;
@@ -26,7 +26,7 @@
 }
 
 .modal-container-grocery {
-  height: calc(100% - 18rem);
+  height: calc(100% - 12rem);
   margin-top: 11rem;
 }
 .title-box {

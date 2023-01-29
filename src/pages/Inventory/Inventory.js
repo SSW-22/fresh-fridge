@@ -25,26 +25,24 @@ function Inventory() {
           type="inventory"
         />
       </div>
-      <div className={classes["inventory-list"]}>
-        <InventoryList
-          category={category}
-          searchString={searchString}
+      <InventoryList
+        category={category}
+        searchString={searchString}
+        selectedId={selectedId}
+        setSelctedId={setSelctedId}
+      />
+
+      {!openForm && selectedId && (
+        <EditMoveDelete
+          type="inventory"
           selectedId={selectedId}
           setSelctedId={setSelctedId}
         />
-
-        {!openForm && selectedId && (
-          <EditMoveDelete
-            type="inventory"
-            selectedId={selectedId}
-            setSelctedId={setSelctedId}
-          />
-        )}
-        {!openForm && !selectedId && (
-          <AddItemBtn type="inventory" callbackFn={setOpenForm} />
-        )}
-        {openForm && <AddItemForm setOpenForm={setOpenForm} />}
-      </div>
+      )}
+      {!openForm && !selectedId && (
+        <AddItemBtn type="inventory" callbackFn={setOpenForm} />
+      )}
+      {openForm && <AddItemForm setOpenForm={setOpenForm} />}
     </div>
   );
 }
