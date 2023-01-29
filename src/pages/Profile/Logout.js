@@ -16,7 +16,7 @@ function Logout() {
       dispatch(inventoryActions.deleteUser());
       dispatch(groceryActions.deleteUser());
     } catch (error) {
-      console.log(error);
+      // console.log(error);
     }
   };
 

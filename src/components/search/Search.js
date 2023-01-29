@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import { useState } from "react";
 import { BiSearch, BiArrowBack } from "react-icons/bi";
 import { useAppDispatch, useAppSelector } from "../../hooks/react-redux-hooks";
@@ -69,7 +70,7 @@ function Search({ category, setSearchString, searchString, type }) {
           // console.log(searchString);
           dispatch(searchRecipe(inputString));
         } catch (error) {
-          console.log(error);
+          // console.log(error);
         }
       }
     }
@@ -78,9 +79,8 @@ function Search({ category, setSearchString, searchString, type }) {
   return (
     <form
       onSubmit={onSubmitHandler}
-      className={`${classes.container} ${
-        isSearchOpen ? `${classes.search}` : ""
-      } ${animation ? `${classes.close}` : ""}`}
+      className={`${classes.container} ${isSearchOpen ? `${classes.search}` : ""
+        } ${animation ? `${classes.close}` : ""}`}
     >
       {!isSearchOpen && (
         <button
@@ -105,15 +105,13 @@ function Search({ category, setSearchString, searchString, type }) {
           <input
             type="text"
             name="text"
-            placeholder={`Search ${
-              type === "inventory"
-                ? `${inventoryCategoryObj[category]}`
-                : `${
-                    category === "0"
-                      ? `${"recipe with"}`
-                      : `${recipeCategoryObj[category]}`
-                  }`
-            } `}
+            placeholder={`Search ${type === "inventory"
+              ? `${inventoryCategoryObj[category]}`
+              : `${category === "0"
+                ? `${"recipe with"}`
+                : `${recipeCategoryObj[category]}`
+              }`
+              } `}
             value={inputString}
             onChange={onChangeHandler}
           />

@@ -22,8 +22,8 @@ function SignIn() {
         dispatch(groceryActions.addUser(user.uid));
         navigate("inventory");
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
+        // console.log(error);
       });
   };
 
