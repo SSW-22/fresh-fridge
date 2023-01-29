@@ -17,12 +17,12 @@
   left: 50%;
   transform: translateX(-50%);
 }
-.inventory-list {
+/* .inventory-list {
   width: 100%;
   display: flex;
   justify-content: center;
   margin-top: 12.5rem;
-}
+} */
 
 .empty-page {
   height: 90%;

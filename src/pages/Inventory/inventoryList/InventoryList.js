@@ -21,16 +21,16 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
         </div>
       )}
       {items.length > 0 && (
-        <div>
+        <>
           {category === "0" &&
             fridge.length === 0 &&
             freezer.length === 0 &&
             pantry.length === 0 && <NoResult />}
-          <div>
+          <>
             {(category === "0" || category === "1") && (
               <div className={classes["list-box"]}>
                 {fridge.length > 0 && (
-                  <div>
+                  <>
                     {category === "0" && (
                       <p className={classes.title}>Fridge</p>
                     )}
@@ -44,7 +44,7 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
                         />
                       ))}
                     </ul>
-                  </div>
+                  </>
                 )}
                 {fridge.length === 0 && category === "1" && <NoResult />}
               </div>
@@ -52,7 +52,7 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
             {(category === "0" || category === "2") && (
               <div className={classes["list-box"]}>
                 {freezer.length > 0 && (
-                  <div>
+                  <>
                     {category === "0" && (
                       <p className={classes.title}>Freezer</p>
                     )}
@@ -66,7 +66,7 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
                         />
                       ))}
                     </ul>
-                  </div>
+                  </>
                 )}
                 {freezer.length === 0 && category === "2" && <NoResult />}
               </div>
@@ -74,7 +74,7 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
             {(category === "0" || category === "3") && (
               <div className={classes["list-box"]}>
                 {pantry.length > 0 && (
-                  <div>
+                  <>
                     {category === "0" && (
                       <p className={classes.title}>Pantry</p>
                     )}
@@ -88,13 +88,13 @@ function InventoryList({ category, searchString, selectedId, setSelctedId }) {
                         />
                       ))}
                     </ul>
-                  </div>
+                  </>
                 )}
                 {pantry.length === 0 && category === "3" && <NoResult />}
               </div>
             )}
-          </div>
-        </div>
+          </>
+        </>
       )}
     </div>
   );
