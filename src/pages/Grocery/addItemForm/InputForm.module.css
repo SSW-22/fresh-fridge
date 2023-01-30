@@ -72,6 +72,7 @@
   border: solid 1.5px var(--color-green);
   line-height: normal;
   cursor: pointer;
+  font-weight: 300;
 }
 .qty-btn {
   pointer-events: none;
