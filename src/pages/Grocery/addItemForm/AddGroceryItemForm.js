@@ -53,7 +53,7 @@ function AddGroceryItemForm({ setOpenForm, selectedId }) {
             onClick={closeFormHandeler}
             className={classes["close-btn"]}
           >
-            <MdOutlineClose size={17} />
+            <MdOutlineClose size={17} color="#000000" />
           </button>
         </div>
         <InputForm onSubmit={submitHandler} selectedId={selectedId} />

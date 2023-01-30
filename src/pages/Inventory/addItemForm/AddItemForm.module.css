@@ -164,6 +164,7 @@
   position: absolute;
   bottom: 2.1rem;
   cursor: pointer;
+  font-weight: 300;
 }
 .move-submit {
   width: 11rem;

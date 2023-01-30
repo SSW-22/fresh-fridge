@@ -108,6 +108,7 @@ footer li {
   border: solid 1.5px var(--color-green);
   line-height: normal;
   cursor: pointer;
+  font-weight: 300;
 }
 
 @media only screen and (min-width: 1200px) {

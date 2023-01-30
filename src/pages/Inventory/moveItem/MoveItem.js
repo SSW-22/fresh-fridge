@@ -49,7 +49,11 @@ function MoveItem({ setOpenForm, selectedId, userData }) {
           className={classes["exit-btn"]}
           onClick={closeHandler}
         >
-          <MdOutlineClose className={classes["exit-btn-icon"]} size={17} />
+          <MdOutlineClose
+            className={classes["exit-btn-icon"]}
+            size={17}
+            color="#000000"
+          />
         </button>
       </div>
       <div className={classes["btn-container"]}>
