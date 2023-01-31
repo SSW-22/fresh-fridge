@@ -289,7 +289,7 @@ function AddItemForm({
                   e.preventDefault();
                   setDate(e.target.value);
                 }}
-                placeholder="yyyy-mm-dd"
+                placeholder="yyyy - mm - dd"
                 // className={classes["date-input"]}
                 className={`${classes["date-input"]} ${
                   date ? classes["date-input-filled"] : ""
