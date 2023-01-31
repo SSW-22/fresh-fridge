@@ -29,7 +29,8 @@ function AddItemForm({
   const userData = useAppSelector((state) => state.inventory);
   const groceryUserData = useAppSelector((state) => state.grocery);
   const nameRef = useRef();
-  const expireDateRef = useRef();
+  // const expireDateRef = useRef();
+  const [date, setDate] = useState("");
   const [itemQty, setItemQty] = useState({ qty: "" });
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -44,7 +45,8 @@ function AddItemForm({
   useEffect(() => {
     if (initialInventoryItem) {
       nameRef.current.value = initialInventoryItem.name;
-      expireDateRef.current.value = initialInventoryItem.expireDate;
+      // expireDateRef.current.value = initialInventoryItem.expireDate;
+      setDate(initialInventoryItem.expireDate);
       setSelectedOption(initialInventoryItem.category);
       setItemQty({ qty: initialInventoryItem.qty });
     }
@@ -100,7 +102,8 @@ function AddItemForm({
     const newItem = {
       id: selectedId || uuidv4(),
       name: nameRef.current.value,
-      expireDate: expireDateRef.current.value,
+      // expireDate: expireDateRef.current.value,
+      expireDate: date,
       category: selectedOption,
       qty: itemQty.qty,
     };
@@ -280,8 +283,17 @@ function AddItemForm({
               <input
                 type="date"
                 id="expirationDate"
-                ref={expireDateRef}
-                className={classes["date-input"]}
+                // ref={expireDateRef}
+                value={date}
+                onChange={(e) => {
+                  e.preventDefault();
+                  setDate(e.target.value);
+                }}
+                placeholder="yyyy-mm-dd"
+                // className={classes["date-input"]}
+                className={`${classes["date-input"]} ${
+                  date ? classes["date-input-filled"] : ""
+                }`}
               />
             </label>
           </div>
