@@ -80,7 +80,24 @@
   border: 1.5px solid var(--color-green);
   border-radius: 30px;
   height: 3rem;
+  color: #000000;
 }
+
+/* @supports (-webkit-overflow-scrolling: touch) { */
+.date-input::before {
+  color: #000;
+  content: attr(placeholder);
+}
+.date-input-filled::before {
+  content: "" !important;
+}
+input[type="date"]:in-range::-webkit-datetime-edit-year-field,
+input[type="date"]:in-range::-webkit-datetime-edit-month-field,
+input[type="date"]:in-range::-webkit-datetime-edit-day-field,
+input[type="date"]:in-range::-webkit-datetime-edit-text {
+  color: transparent;
+}
+/* } */
 
 .input-container .input-divider {
   display: flex;
