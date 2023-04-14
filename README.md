@@ -6,7 +6,7 @@ Fresh Fridge is a user-friendly website that helps individuals keep track of the
 
 ## Live
 
-freshfridge.ca
+https://freshfridge.ca/
 
 ## Key Features and Functionalities
 
